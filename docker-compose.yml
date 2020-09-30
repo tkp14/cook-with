@@ -1,0 +1,35 @@
+version: '3'
+volumes:
+  tmp_data:
+  public_data:
+services:
+  nginx:
+    build:
+      context: ./
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - '80:80'
+    volumes:
+      - public_data:/cook-with/public
+      - tmp_data:/cook-with/tmp/sockets
+    depends_on:
+      - app
+    links:
+      - app
+  app:
+    build:
+      context: ./
+      dockerfile: ./docker/rails/Dockerfile
+    command: bundle exec puma
+    volumes:
+      - .:/cook-with:cached
+      - tmp_data:/cook-with/tmp/sockets
+      - public_data:/cook-with/public
+    tty: true
+    stdin_open: true
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
