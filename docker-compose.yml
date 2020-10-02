@@ -28,8 +28,8 @@ services:
     tty: true
     stdin_open: true
   db:
-    image: postgres
+    image: postgres:12.3
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_PASSWORD: password
