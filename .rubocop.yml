@@ -1,40 +1,35 @@
-inherit_from:
-  - .rubocop_airbnb.yml
+AllCops:
+  Exclude:
+    - "tmp/**/*"
+    - "config/initializers/*"
+    - "vendor/**/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "db/migrate/*.rb"
+    - "bin/*"
+  DisplayCopNames: true
+  TargetRubyVersion: 2.5.7
 
 Rails:
   Enabled: true
 
-AllCops:
-  Exclude:
-    - 'bin/**'
-    - 'config/**/*'
-    - 'db/**/*'
-    - 'vendor/**/**/*'
-    - 'spec/*'
+Style/AndOr:
+  EnforcedStyle: conditionals
 
-Style/TrailingCommaInHashLiteral:
+Style/AsciiComments:
   Enabled: false
 
-Style/BlockDelimiters:
+Style/Documentation:
   Enabled: false
 
-Layout/FirstHashElementLineBreak:
+Style/NumericLiterals:
   Enabled: false
 
-Airbnb/OptArgParameters:
+Style/ClassAndModuleChildren:
   Enabled: false
 
-Style/ColonMethodCall:
+Bundler/OrderedGems:
   Enabled: false
 
-Layout/IndentationConsistency:
-  Enabled: false
-
-Layout/IndentationWidth:
-  Enabled: false
-
-Style/MixinUsage:
-  Enabled: false
-
-Style/MutableConstant:
+Lint/ShadowedException:
   Enabled: false

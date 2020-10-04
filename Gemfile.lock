@@ -182,6 +182,8 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.3)
+    rspec_junit_formatter (0.4.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     rubocop (0.76.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -274,11 +276,12 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
-  pg (>= 0.18, < 2.0)
+  pg (= 1.2.3)
   puma (~> 3.11)
   rails (= 5.2.3)
   rails-controller-testing
   rspec-rails (~> 4.0.0.beta2)
+  rspec_junit_formatter
   rubocop-airbnb
   sass-rails (~> 5.0)
   selenium-webdriver
