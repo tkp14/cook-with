@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # システムスペック用の設定
 Capybara.javascript_driver = :chrome_headless
 

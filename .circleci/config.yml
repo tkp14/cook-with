@@ -37,8 +37,7 @@ jobs:
       # Rubocop
       - run:
           name: Rubocop
-          command: rubocop -a
-                   bundle exec rubocop
+          command: bundle exec rubocop --fail-level W --display-only-fail-level-offenses
 
   rspec:
     docker:
