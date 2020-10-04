@@ -1,0 +1,8 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  host: '127.0.0.1'
+  username: postgres
+  port: 5432
+  pool: 5
+  database: ci_test
