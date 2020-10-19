@@ -20,7 +20,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: postgres
   password: postgres
-  host: <%= ENV['POSTGRES_HOST'] %>
+  host: db
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
 
@@ -54,6 +54,7 @@ test:
 #
 production:
   <<: *default
-  database: cook-with_production
-  username: cook-with
-  password: <%= ENV['COOK-WITH_DATABASE_PASSWORD'] %>
+  host: <%= Rails.application.credentials.rds[:host] %>
+  database: <%= Rails.application.credentials.rds[:database] %>
+  username: <%= Rails.application.credentials.rds[:username] %>
+  password: <%= Rails.application.credentials.rds[:password] %>
