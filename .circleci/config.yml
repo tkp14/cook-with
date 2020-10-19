@@ -89,3 +89,12 @@ workflows:
       - rspec:
           requires:
             - rubocop
+
+      - add_ssh_keys:
+          fingerprints:
+            - "09:fb:b0:57:07:07:c2:5c:8e:53:99:4a:31:2f:8a:8c"
+
+      - deploy:
+          name: Capistrano deploy
+          command:
+　　　　　　  bundle exec cap production deploy
