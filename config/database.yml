@@ -32,8 +32,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  host: <%= ENV.fetch("POSTGRES_HOST") { 'db' } %>
   database: cook-with_test
+  host: <%= Rails.application.credentials.rds&.[](:host) %>
+  database: <%= Rails.application.credentials.rds&.[](:database) %>
+  username: <%= Rails.application.credentials.rds&.[](:username) %>
+  password: <%= Rails.application.credentials.rds&.[](:password) %> %>
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
