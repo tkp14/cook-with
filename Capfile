@@ -13,8 +13,6 @@ require "capistrano/deploy"
 # install_plugin Capistrano::SCM::Svn
 # or
 require "capistrano/scm/git"
-install_plugin Capistrano::SCM::Git
-
 # Include tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
@@ -28,13 +26,14 @@ install_plugin Capistrano::SCM::Git
 #
 # require "capistrano/rvm"
 require "capistrano/rbenv"
-# require 'capistrano/puma'
+require 'capistrano/puma'
 # require "capistrano/chruby"
-require 'capistrano/rbenv_vars'
 require "capistrano/bundler"
 require "capistrano/rails/assets"
-# require "capistrano/rails/migrations"
+require "capistrano/rails/migrations"
 # require "capistrano/passenger"
 
+install_plugin Capistrano::SCM::Git
+install_plugin Capistrano::Puma
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
-Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
+Dir.glob("lib/capistrano/tasks/*.rb").each { |r| import r }
