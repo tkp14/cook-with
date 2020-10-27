@@ -1,7 +1,3 @@
-# Ruby CircleCI 2.1 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
 version: 2.1
 jobs:
   rubocop:
@@ -81,12 +77,30 @@ jobs:
           name: Rspec
           command: bundle exec rspec
 
+  deploy:
+    executor: default
+    steps:
+      - checkout
+      - setup
+      - add_ssh_keys:
+          fingerprints:
+            - 90:d5:e1:b8:01:11:39:36:6d:ce:35:8f:51:e5:60:60
+      - deploy:
+          name: Deploy with Capistrano
+          command: bundle exec cap production deploy
 
 workflows:
   version: 2.1
-  rubocop_rspec:
+  rubocop_rspec_deploy:
     jobs:
       - rubocop
       - rspec:
           requires:
             - rubocop
+      - deploy:
+          requires:
+            - rubocop
+            - rspec
+          filters:
+            branches:
+              only: master
