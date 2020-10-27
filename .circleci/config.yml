@@ -84,14 +84,14 @@ jobs:
       - setup
       - add_ssh_keys:
           fingerprints:
-            - 90:d5:e1:b8:01:11:39:36:6d:ce:35:8f:51:e5:60:60
+            - c9:9d:72:42:c3:3e:13:42:ac:69:87:01:74:4a:3c:8e
       - deploy:
           name: Deploy with Capistrano
           command: bundle exec cap production deploy
 
 workflows:
   version: 2.1
-  rubocop_rspec:
+  test_and_deploy:
     jobs:
       - rubocop
       - rspec:
