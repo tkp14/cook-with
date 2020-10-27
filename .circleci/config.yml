@@ -91,7 +91,7 @@ jobs:
 
 workflows:
   version: 2.1
-  rubocop_rspec_deploy:
+  rubocop_rspec:
     jobs:
       - rubocop
       - rspec:
