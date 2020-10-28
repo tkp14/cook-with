@@ -7,16 +7,31 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:
           name: database.ymlの再設定
           command: |
             rm ./config/database.yml
             mv ./config/database.ci.yml ./config/database.yml
       - run:
-          name: Dockerコンテナのビルド
-          command: docker-compose build
+          name: docker-compose up
+          command: |
+            set -x
+            docker-compose up --build -d
       - run:
-          name: Dockerコンテナの起動
-          command: docker-compose up -d
+          name: docker-compose stop
+          command: |
+            set -x
+            docker-compose stop
+      - run:
+          name: docker-compose up
+          command: |
+            set -x
+            docker-compose up -d
       - run:
           name: データベースのセットアップ
           command: docker-compose exec app bundle exec rails db:create db:migrate RAILS_ENV=test
