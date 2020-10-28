@@ -36,8 +36,14 @@ jobs:
           name: データベースのセットアップ
           command: docker-compose exec app bundle exec rails db:create db:migrate RAILS_ENV=test
       - run:
-          name: RSpecテスト実行
-          command: docker-compose exec app bundle exec bin/rspec
+           name: Rspecテスト実行
+           command: |
+             mkdir /tmp/test-results
+             TEST_FILES="$(circleci tests glob 'spec/**/*_spec.rb' | circleci tests split --split-by=timings)"
+             docker-compose exec app bin/rspec --format progress \
+                                                                   --format RspecJunitFormatter \
+                                                                   --out /tmp/test-results/rspec.xml \
+                                                                   $TEST_FILES
       - run:
           name: Rubocopテスト実行
           command: docker-compose exec app rubocop --fail-level W --display-only-fail-level-offenses
