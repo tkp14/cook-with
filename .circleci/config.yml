@@ -1,106 +1,31 @@
 version: 2.1
 jobs:
-  rubocop:
-    docker:
-      - image: circleci/ruby:2.5.7-node-browsers-legacy
-        environment:
-          BUNDLER_VERSION: 2.1.4
-          RAILS_ENV: test
-          POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres:12.3-postgis-ram
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: cook-with_test
-          POSTGRES_HOST_AUTH_METHOD: trust
-    working_directory: ~/cook-with
+  build:
+    # docker-composeがインストール済みの仮想マシンをプル
+    machine:
+      image: circleci/classic:edge
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
       - run:
-            name: install dependencies
-            command: |
-              gem install bundler -v 2.1.4
-              bundle install --jobs=4 --retry=3 --path vendor/bundle
-              yarn install
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      # Rubocop
+          name: database.ymlの再設定
+          command: |
+            rm ./config/database.yml
+            mv ./config/database.ci.yml ./config/database.yml
       - run:
-          name: Rubocop
-          command: bundle exec rubocop --fail-level W --display-only-fail-level-offenses
-
-  rspec:
-    docker:
-      - image: circleci/ruby:2.5.7-node-browsers-legacy
-        environment:
-          BUNDLER_VERSION: 2.1.4
-          RAILS_ENV: test
-          POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres:12.3-postgis-ram
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: cook-with_test
-          POSTGRES_HOST_AUTH_METHOD: trust
-    working_directory: ~/cook-with
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+          name: Dockerコンテナのビルド
+          command: docker-compose build
       - run:
-            name: install dependencies
-            command: |
-              gem install bundler -v 2.1.4
-              bundle install --jobs=4 --retry=3 --path vendor/bundle
-              yarn install
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
+          name: Dockerコンテナの起動
+          command: docker-compose up -d
       - run:
-            name: DBの起動を待つ
-            command: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
-
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-      # Rspec
+          name: データベースのセットアップ
+          command: docker-compose exec web bundle exec rails db:create db:migrate RAILS_ENV=test
       - run:
-          name: Rspec
-          command: bundle exec rspec
-
-  deploy:
-    executor: default
-    steps:
-      - checkout
-      - setup
-      - add_ssh_keys:
-          fingerprints:
-            - c9:9d:72:42:c3:3e:13:42:ac:69:87:01:74:4a:3c:8e
-      - deploy:
-          name: Deploy with Capistrano
-          command: bundle exec cap production deploy
-
-workflows:
-  version: 2.1
-  test_and_deploy:
-    jobs:
-      - rubocop
-      - rspec:
-          requires:
-            - rubocop
-      - deploy:
-          requires:
-            - rubocop
-            - rspec
-          filters:
-            branches:
-              only: master
+          name: RSpecテスト実行
+          command: docker-compose exec app bundle exec bin/rspec
+      - run:
+          name: Rubocopテスト実行
+          command: docker-compose exec app rubocop --fail-level W --display-only-fail-level-offenses
+      - run:
+          name: Dockerコンテナの停止
+          command: docker-compose down
