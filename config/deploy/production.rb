@@ -3,7 +3,7 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-# server '52.196.123.212', user: 'takaP', roles: %w{app db web}
+server '52.196.123.212', user: 'takaP', roles: %w{app db web}
 
 # role-based syntax
 # ==================
@@ -37,11 +37,11 @@
 #
 # Global options
 # --------------
-# set :ssh_options, {
-#  keys: ["#{ENV.fetch('PRODUCTION_SSH_KEY')}"],
-#  forward_agent: true,
- # auth_methods: %w[publickey]
-#}
+set :ssh_options, {
+  keys: ["#{ENV.fetch('PRODUCTION_SSH_KEY')}"],
+  forward_agent: true,
+  auth_methods: %w[publickey]
+}
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
