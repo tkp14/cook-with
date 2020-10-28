@@ -4,6 +4,7 @@ jobs:
     # docker-composeがインストール済みの仮想マシンをプル
     machine:
       image: circleci/classic:edge
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
@@ -12,11 +13,6 @@ jobs:
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:
-          name: database.ymlの再設定
-          command: |
-            rm ./config/database.yml
-            mv ./config/database.ci.yml ./config/database.yml
       - run:
           name: docker-compose up
           command: |

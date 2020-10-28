@@ -40,8 +40,7 @@
 set :ssh_options, {
   keys: ["#{ENV.fetch('PRODUCTION_SSH_KEY')}"],
   forward_agent: true,
-  auth_methods: %w[publickey],
-  port: 33333,
+  auth_methods: %w[publickey]
 }
 #
 # The server-based syntax can be used to override options:
