@@ -5,7 +5,7 @@ RUN rm -f /etc/nginx/conf.d/*
 
 # Nginxの設定ファイルをコンテナにコピー
 COPY /docker/nginx/nginx.conf /etc/nginx/conf.d/cook-with.conf
-
+WORKDIR /cook-with
 # 画像などのpublicファイルはnginxに配置
 RUN mkdir -p /cook-with/public
 COPY ./public /cook-with/public
