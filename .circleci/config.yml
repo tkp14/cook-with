@@ -4,7 +4,7 @@ jobs:
     # docker-composeがインストール済みの仮想マシンをプル
     machine:
       image: circleci/classic:edge
-    working_directory: ~/cook-with
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
