@@ -51,11 +51,5 @@ jobs:
 
       - deploy:
           name: Capistrano deploy
-          command: |
-            if [ "${CIRCLE_BRANCH}" != "master" ]; then
-              exit 0
-            fi
+          command:
             docker-compose exec app bundle exec cap production deploy
-      - run:
-          name: Dockerコンテナの停止
-          command: docker-compose down
