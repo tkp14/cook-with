@@ -1,92 +1,48 @@
-# Ruby CircleCI 2.1 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
 version: 2.1
 jobs:
-  rubocop:
-    docker:
-      - image: circleci/ruby:2.5.7-node-browsers-legacy
-        environment:
-          BUNDLER_VERSION: 2.1.4
-          RAILS_ENV: test
-          POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres:12.3-postgis-ram
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: cook-with_test
-          POSTGRES_HOST_AUTH_METHOD: trust
+  build:
+    # docker-composeがインストール済みの仮想マシンをプル
+    machine:
+      image: circleci/classic:edge
     working_directory: ~/cook-with
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
       - run:
-            name: install dependencies
-            command: |
-              gem install bundler -v 2.1.4
-              bundle install --jobs=4 --retry=3 --path vendor/bundle
-              yarn install
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      # Rubocop
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run:
-          name: Rubocop
-          command: bundle exec rubocop --fail-level W --display-only-fail-level-offenses
-
-  rspec:
-    docker:
-      - image: circleci/ruby:2.5.7-node-browsers-legacy
-        environment:
-          BUNDLER_VERSION: 2.1.4
-          RAILS_ENV: test
-          POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres:12.3-postgis-ram
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: cook-with_test
-          POSTGRES_HOST_AUTH_METHOD: trust
-    working_directory: ~/cook-with
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+          name: docker-compose up
+          command: |
+            set -x
+            docker-compose up --build -d
       - run:
-            name: install dependencies
-            command: |
-              gem install bundler -v 2.1.4
-              bundle install --jobs=4 --retry=3 --path vendor/bundle
-              yarn install
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
+          name: docker-compose stop
+          command: |
+            set -x
+            docker-compose stop
       - run:
-            name: DBの起動を待つ
-            command: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
-
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-      # Rspec
+          name: docker-compose up
+          command: |
+            set -x
+            docker-compose up -d
       - run:
-          name: Rspec
-          command: bundle exec rspec
-
-
-workflows:
-  version: 2.1
-  rubocop_rspec:
-    jobs:
-      - rubocop
-      - rspec:
-          requires:
-            - rubocop
+          name: データベースのセットアップ
+          command: docker-compose exec app bundle exec rails db:create db:migrate RAILS_ENV=test
+      - run:
+           name: Rspecテスト実行
+           command: |
+             mkdir /tmp/test-results
+             TEST_FILES="$(circleci tests glob 'spec/**/*_spec.rb' | circleci tests split --split-by=timings)"
+             docker-compose exec app bin/rspec --format progress \
+                                                                   --format RspecJunitFormatter \
+                                                                   --out /tmp/test-results/rspec.xml \
+                                                                   $TEST_FILES
+      - run:
+          name: Rubocopテスト実行
+          command: docker-compose exec app rubocop --fail-level W --display-only-fail-level-offenses
+      - run:
+          name: Dockerコンテナの停止
+          command: docker-compose down

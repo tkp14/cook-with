@@ -2,8 +2,7 @@
 lock "~> 3.14.1"
 
 set :application, "cook-with"
-# デプロイ先の指定
-set :deploy_to, "/home/takaP/cook-with"
+
 set :repo_url, "git@github.com:tkp14/cook-with.git"
 
 # ソケットの場所、Nginxとのやり取りに必要
@@ -22,7 +21,7 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} #{fetch(:rbenv_path)}/bin/r
 # タスクでsudoなどを行う際に必要
 set :pty, true
 # シンボリックリンクのファイルを指定、具体的にはsharedに入るファイル
-append :linked_files, "config/master.key"
+set :linked_files, %w[config/master.key]
 # シンボリックリンクのディレクトリを生成
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads", "public/storage"
 # 保存しておく過去分のアプリ数
