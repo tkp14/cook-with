@@ -42,7 +42,20 @@ jobs:
                                                                    $TEST_FILES
       - run:
           name: Rubocopテスト実行
-          command: docker-compose exec app rubocop --fail-level W --display-only-fail-level-offenses
+          command: docker-compose exec app rubocop --fail-level W
+          --display-only-fail-level-offenses
+
+      - add_ssh_keys:
+          fingerprints:
+            - "c9:9d:72:42:c3:3e:13:42:ac:69:87:01:74:4a:3c:8e"
+
+      - deploy:
+          name: Capistrano deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" != "master" ]; then
+              exit 0
+            fi
+            docker-compose exec app bundle exec cap production deploy
       - run:
           name: Dockerコンテナの停止
           command: docker-compose down
