@@ -42,9 +42,7 @@ jobs:
                                                                    $TEST_FILES
       - run:
           name: Rubocopテスト実行
-          command: docker-compose exec app rubocop --fail-level W
-          --display-only-fail-level-offenses
-      
+          command: docker-compose exec app rubocop --fail-level W --display-only-fail-level-offenses
       - run:
           name: Dockerコンテナの停止
           command: docker-compose down
