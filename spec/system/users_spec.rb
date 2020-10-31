@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
-  descrive "ユーザー登録ページ" do
+  describe "ユーザー登録ページ" do
     before do
       visit signup_path
     end
