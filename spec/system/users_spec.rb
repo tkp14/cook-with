@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
-  describe "ユーザー登録ページ" do
-    before do
-      visit signup_path
-    end
+  let!(:user) { create(:user) }
 
+  describe "ユーザー登録ページ" do
     context "ページレイアウト" do
       it "ユーザー登録の文字が存在することを確認" do
         expect(page).to have_context 'ユーザー登録'
