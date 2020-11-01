@@ -4,9 +4,13 @@ RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
 
   describe "ユーザー登録ページ" do
+    before do
+      visit signup_path
+    end
+
     context "ページレイアウト" do
-      it "ユーザー登録の文字が存在することを確認" do
-        expect(page).to have_context 'ユーザー登録'
+      it "<ユーザー登録> の文字が存在することを確認" do
+        expect(page).to have_content 'ユーザー登録'
       end
 
       it "正しいタイトルが表示されることを確認" do
