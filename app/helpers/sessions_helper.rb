@@ -24,7 +24,7 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
-
+end
   # ユーザーのセッションを永続的にする
   def remember(user)
     user.remember
@@ -46,3 +46,4 @@ module SessionsHelper
       end
     end
   end
+end
