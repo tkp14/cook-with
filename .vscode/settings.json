@@ -1,3 +1,11 @@
 {
-  "emmet.triggerExpansionOnTab": true
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.excludeLanguages": [
+  
+
+    "markdown"
+  ],
+  "editor.codeActionsOnSave": null,
+  "files.autoSave": "afterDelay",
+  "editor.tabSize": 2
 }
