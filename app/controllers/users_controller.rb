@@ -29,21 +29,22 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params_update)
       flash[:success] = "プロフィールが更新されました！"
+      redirect_to @user
     else
-      render "edit"
+      render 'edit'
     end
   end
 
   private
 
-    # ユーザー新規作成時に許可する属性
-    def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
-    end
+  # ユーザー新規作成時に許可する属性
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation)
+  end
 
-    # プロフィール編集時に許可する属性
-    def user_params_update
-      params.require(:user).permit(:name, :email, :introduction, :sex)
-    end
+  # プロフィール編集時に許可する属性
+  def user_params_update
+    params.require(:user).permit(:name, :email, :introduction, :sex)
+  end
 end
