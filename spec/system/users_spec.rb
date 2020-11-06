@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
+  let!(:admin_user) { create(:user, :admin) }
 
   describe "ユーザー一覧ページ" do
     it "ぺージネーション、削除ボタンが表示されること" do
