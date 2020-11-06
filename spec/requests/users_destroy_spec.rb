@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "ユーザーの削除", type: :request do
   let!(:admin_user) { create(:user, :admin) }
   let!(:user) { create(:user) }

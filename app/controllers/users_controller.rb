@@ -47,6 +47,7 @@ class UsersController < ApplicationController
       redirect_to users_url
     # 管理者ユーザーではないが、自分のアカウントの場合
     elsif current_user?(@user)
+      @user.destroy
       flash[:success] = "自分のアカウントを削除しました"
       redirect_to root_url
     else

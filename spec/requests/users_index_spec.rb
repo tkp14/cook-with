@@ -5,7 +5,7 @@ RSpec.describe "ユーザー一覧ページ", type: :request do
   let!(:admin_user) { create(:user, :admin) }
 
   context "認可されたユーザーの場合" do
-    it "レスポンスが正常に表示されること"
+    it "レスポンスが正常に表示されること" do
       login_for_request(user)
       get users_path
       expect(response).to render_template('users/index')
