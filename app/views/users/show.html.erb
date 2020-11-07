@@ -8,12 +8,23 @@
       </div>
     </div>
     <div class="col-md-8">
-      <h4 class="show-user-name"><%= @user.name %></h4>　<%= @user.sex %>
+      <h4 class="show-user-name"><%= @user.name %></h4> <%= @user.sex %>
       <div>
         <%= @user.introduction %>
       </div>
       <% if current_user == @user %>
         <div class="account-edit"><%= link_to "プロフィール編集", edit_user_path(@user) %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+      <% if @user.dishes.any? %>
+        <h3>料理 (<%= @user.dishes.count %>)</h3>
+        <ol class="dishes">
+          <%= render @dishes %>
+        </ol>
+        <%= will_paginate @dishes %>
       <% end %>
     </div>
   </div>
