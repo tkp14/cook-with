@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Dish, type: :model do
+  let!(:dish_yesterday) { create(:dish, :yesterday) }
+  let!(:dish_one_week_ago) { create(:dish, :one_week_ago) }
+  let!(:dish_one_month_ago) { create(:dish, :one_month_ago) }
   let(:dish) { create(:dish) }
 
   context "バリデーション" do
@@ -48,6 +51,12 @@ RSpec.describe Dish, type: :model do
       dish = build(:dish, popularity: 6)
       dish.valid?
       expect(dish.errors[:popularity]).to include("は5以下の値にしてください")
+    end
+  end
+
+  context "並び順" do
+    it "最も最近の投稿が最初の投稿になっていること" do
+      expect(dish).to eq Dish.first
     end
   end
 end
