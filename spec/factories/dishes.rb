@@ -1,13 +1,12 @@
 FactoryBot.define do
   factory :dish do
-    name "MyString"
-    description "MyText"
-    portion 1.5
-    tips "MyText"
-    reference "MyText"
-    required_time 1
-    popularity 1
-    cook_memo "MyText"
-    user nil
+    name { Faker::Food.dish }
+    description { "冬に食べたくなる、身体が温まる料理です" }
+    portion { 1.5 }
+    tips { "ピリッと辛めに味付けするのがオススメ" }
+    reference { "https://cookpad.com/recipe/2798655" }
+    required_time { 30 }
+    popularity { 5 }
+    association :user
   end
 end
