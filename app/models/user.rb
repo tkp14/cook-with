@@ -22,11 +22,6 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
-
-    # フィード一覧を取得
-    def feed
-      Dish.where("user_id = ?", id)
-    end
   end
 
   # 永続セッションのためにユーザーをデータベースに記憶する
@@ -46,8 +41,13 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  # フィード一覧を取得
+  def feed
+    Dish.where("user_id = ?", id)
+  end
+
   private
-    def downcase_email
-      self.email = email.downcase
-    end
+  def downcase_email
+    self.email = email.downcase
+  end
 end
