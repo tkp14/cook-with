@@ -2,6 +2,11 @@
 <div class="container">
   <div class="row">
     <h2 class="dish-name"><%= @dish.name %></h2>
+    <div class="change-dish">
+      <% if current_user == @dish.user %>
+        <%= link_to "編集", edit_dish_path(@dish), class: 'edit-dish' %> 
+      <% end %>
+    </div>
     <h4><%= @dish.description %></h4>
     <h4 class="dish-reference">作り方：<%= link_to "#{@dish.reference}", @dish.reference, target: "_blank" %></h4>
     <h4 class="dish-portion">分量：<%= @dish.portion %> 人分</h4>
