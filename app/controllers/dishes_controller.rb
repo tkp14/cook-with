@@ -1,5 +1,6 @@
 class DishesController < ApplicationController
   before_action :logged_in_user
+  before_action :correct_user, only: [:edit, :update]
 
   def new
     @dish = Dish.new
@@ -38,5 +39,11 @@ class DishesController < ApplicationController
   def dish_params
     params.require(:dish).permit(:name, :discription, :portion, :tips,
                                  :reference, :required_time, :popularity, :cook_memo)
+  end
+
+  def correct_user
+    # 現在のユーザーが更新対象の料理を保有しているかどうか確認
+    @dish = current_user.dishes.find_by(id: params[:id])
+    redirect_to root_url if @dish.nil?
   end
 end
