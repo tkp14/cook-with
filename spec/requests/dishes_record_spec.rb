@@ -42,4 +42,12 @@ RSpec.describe "お料理登録", type: :request do
       expect(response).to render_template('dishes/new')
     end
   end
+
+  context "ログインしていないユーザーの場合" do
+    it "ログイン画面にリダイレクトすること" do
+      get new_dish_path
+      expect(response).to have_http_status "302"
+      expect(response).to redirect_to login_path
+    end
+  end
 end
