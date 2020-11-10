@@ -26,7 +26,7 @@ RSpec.describe "お料理登録", type: :request do
                                             popularity: 5 } }
       }.to change(Dish, :count).by(1)
       follow_redirect!
-      expect(response).to render_template('static_pages/home')
+      expect(response).to render_template('dishes/show')
     end
 
     it "無効な料理データでは登録できないこと" do
@@ -40,14 +40,6 @@ RSpec.describe "お料理登録", type: :request do
                                             popularity: 5 } }
       }.not_to change(Dish, :count)
       expect(response).to render_template('dishes/new')
-    end
-  end
-
-  context "ログインしていないユーザーの場合" do
-    it "ログインページにリダイレクトされること" do
-      get new_dish_path
-      expect(response).to have_http_status "302"
-      expect(response).to redirect_to login_path
     end
   end
 end
