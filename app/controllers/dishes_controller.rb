@@ -5,11 +5,15 @@ class DishesController < ApplicationController
     @dish = Dish.new
   end
 
+  def show
+    @dish = Dish.find(params[:id])
+  end
+
   def create
     @dish = current_user.dishes.build(dish_params)
     if @dish.save
       flash[:success] = "料理が登録されました！"
-      redirect_to root_url
+      redirect_to dish_path(@dish)
     else
       render "dishes/new"
     end

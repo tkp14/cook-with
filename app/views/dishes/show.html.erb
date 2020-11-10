@@ -1,0 +1,21 @@
+<% provide(:title, "#{@dish.name}") %>
+<div class="container">
+  <div class="row">
+    <h2 class="dish-name"><%= @dish.name %></h2>
+    <h4><%= @dish.description %></h4>
+    <h4 class="dish-reference">作り方：<%= link_to "#{@dish.reference}", @dish.reference, target: "_blank" %></h4>
+    <h4 class="dish-portion">分量：<%= @dish.portion %> 人分</h4>
+    <div class="tips">
+      <h5 class="title-tips">コツ・ポイント</h5>
+      <h5><%= @dish.tips %></h5>
+    </div>
+    <div class="show-dish-other-info">
+      <div class="dish-info">
+        <h5>所要時間：</h5><h4><%= @dish.required_time %></h4> <h5>分</h5>
+      </div>
+      <div class="dish-info">
+        <h5>人気度：</h5><h4><%= @dish.popularity %></h4>
+      </div>
+    </div>
+  </div>
+</div>
