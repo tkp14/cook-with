@@ -19,6 +19,20 @@ class DishesController < ApplicationController
     end
   end
 
+  def edit
+    @dish = Dish.find(params[:id])
+  end
+
+  def update
+    @dish = Dish.find(params[:id])
+    if @dish.update_attributes(dish_params)
+      flash[:success] = "料理情報が更新されました！"
+      redirect_to @dish
+    else
+      redirect_to 'edit'
+    end
+  end
+
   private
 
   def dish_params
