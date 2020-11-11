@@ -1,5 +1,9 @@
 <%= form_with model: @dish, local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+  <span class="picture">
+    <%= f.label :picture %> <span class="input-unneed">※任意</span>
+    <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'dish_picture' %>
+  </span>
   <div class = 'form-group'>
     <%= f.label :name %> <span class="input-need">※必須</span>
     <%= f.text_field :name, class: 'form-control', id: 'dish_name' %>
