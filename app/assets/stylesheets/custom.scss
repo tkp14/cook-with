@@ -278,3 +278,9 @@ h2.dish-name {
 .edit-dish .delete-dish {
   font-size: 15px;
 }
+
+.dish-picture img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
