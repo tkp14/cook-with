@@ -14,7 +14,7 @@ User.create!(name:  "吉岡 里帆",
               password_confirmation: password)
 end
 
-10.times do |n|
+10.times do
   Dish.create!(name: Faker::Food.dish,
                description: "冬に食べたくなる、身体が温まる料理です",
                portion: 1.5,

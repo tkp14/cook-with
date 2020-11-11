@@ -2,12 +2,12 @@ class DishesController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update]
 
-  def new
-    @dish = Dish.new
-  end
-
   def show
     @dish = Dish.find(params[:id])
+  end
+
+  def new
+    @dish = Dish.new
   end
 
   def create
@@ -30,7 +30,7 @@ class DishesController < ApplicationController
       flash[:success] = "料理情報が更新されました！"
       redirect_to @dish
     else
-      redirect_to 'edit'
+      render 'edit'
     end
   end
 
@@ -49,7 +49,7 @@ class DishesController < ApplicationController
   private
 
   def dish_params
-    params.require(:dish).permit(:name, :discription, :portion, :tips,
+    params.require(:dish).permit(:name, :description, :portion, :tips,
                                  :reference, :required_time, :popularity, :cook_memo)
   end
 

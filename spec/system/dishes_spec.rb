@@ -79,28 +79,40 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_content dish.popularity
       end
     end
+
+    context "料理の削除", js: true do
+      it "削除成功のフラッシュが表示されること" do
+        login_for_system(user)
+        visit dish_path(dish)
+        within find('.change-dish') do
+          click_on '削除'
+        end
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content '料理が削除されました'
+      end
+    end
   end
 
   describe "料理編集ページ" do
-    context "ページレイアウト" do
-      before do
-        login_for_system(user)
-        visit dish_path(dish)
-        click_link "編集"
-      end
+    before do
+      login_for_system(user)
+      visit dish_path(dish)
+      click_link "編集"
+    end
 
+    context "ページレイアウト" do
       it "正しいタイトルが表示されること" do
-        expect(page).to have_title full_title ('料理情報の編集')
+        expect(page).to have_title full_title('料理情報の編集')
       end
 
       it "入力部分に適切なラベルが表示されること" do
-          expect(page).to have_content '料理名'
-          expect(page).to have_content '説明'
-          expect(page).to have_content '分量 [人分]'
-          expect(page).to have_content 'コツ・ポイント'
-          expect(page).to have_content '作り方参照用URL'
-          expect(page).to have_content '所要時間 [分]'
-          expect(page).to have_content '人気度 [1~5]'
+        expect(page).to have_content '料理名'
+        expect(page).to have_content '説明'
+        expect(page).to have_content '分量 [人分]'
+        expect(page).to have_content 'コツ・ポイント'
+        expect(page).to have_content '作り方参照用URL'
+        expect(page).to have_content '所要時間 [分]'
+        expect(page).to have_content '人気度 [1~5]'
       end
     end
 
@@ -129,6 +141,14 @@ RSpec.describe "Dishes", type: :system do
         click_button "更新する"
         expect(page).to have_content '料理名を入力してください'
         expect(dish.reload.name).not_to eq ""
+      end
+    end
+
+    context "料理の削除処理", js: true do
+      it "削除成功のフラッシュが表示されること" do
+        click_on '削除'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content '料理が削除されました'
       end
     end
   end
