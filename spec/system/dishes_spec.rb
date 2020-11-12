@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Dishes", type: :system do
   let!(:user) { create(:user) }
-  let!(:dish) { create(:dish, user: user) }
+  let!(:dish) { create(:dish, :picture, user: user) }
 
   describe "料理の登録ページ" do
     before do
@@ -40,8 +40,15 @@ RSpec.describe "Dishes", type: :system do
         fill_in "作り方参照用URL", with: "https://cookpad.com/recipe/2798655"
         fill_in "所要時間", with: 30
         fill_in "人気度", with: 5
+        attach_file "dish[picture]", "#{Rails.root}/spec/fixtures/test_dish.jpg"
         click_button "登録する"
         expect(page).to have_content "料理が登録されました！"
+      end
+
+      it "画像無しで登録すると、デフォルト画像が割り当てられること" do
+        fill_in "料理名", with: "イカの塩焼き"
+        click_button "登録する"
+        expect(page).to have_link(href: dish_path(Dish.first))
       end
 
       it "無効な情報で料理登録を行うと料理登録失敗のフラッシュが表示されること" do
@@ -77,6 +84,7 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_content dish.reference
         expect(page).to have_content dish.required_time
         expect(page).to have_content dish.popularity
+        expect(page).to have_link nil, href: dish_path(dish), class: 'dish-picture'
       end
     end
 
@@ -125,6 +133,7 @@ RSpec.describe "Dishes", type: :system do
         fill_in "作り方参照用URL", with: "henshu-https://cookpad.com/recipe/2798655"
         fill_in "所要時間", with: 60
         fill_in "人気度", with: 1
+        attach_file "dish[picture]", "#{Rails.root}/spec/fixtures/test_dish2.jpg"
         click_button "更新する"
         expect(page).to have_content "料理情報が更新されました！"
         expect(dish.reload.name).to eq "編集：イカの塩焼き"
@@ -134,6 +143,7 @@ RSpec.describe "Dishes", type: :system do
         expect(dish.reload.reference).to eq "henshu-https://cookpad.com/recipe/2798655"
         expect(dish.reload.required_time).to eq 60
         expect(dish.reload.popularity).to eq 1
+        expect(dish.reload.picture.url).to include "test_dish2.jpg"
       end
 
       it "無効な更新" do
