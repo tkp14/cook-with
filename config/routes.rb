@@ -14,4 +14,5 @@ Rails.application.routes.draw do
     end
   end
   resources :dishes
+  resources :relationships, only: [:create, :destroy]
 end
