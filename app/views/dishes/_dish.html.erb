@@ -1,9 +1,11 @@
+<% @dish = dish %>
 <li id="dish-<%= dish.id %>">
   <%= link_to gravatar_for(dish.user, size: 50), dish.user %>
   <span class="name"><%= link_to dish.name, dish_path(dish) %></span>
   <span>
     <%= link_to((image_tag dish.picture.thumb200.url), dish_path(dish.id), class: 'dish-picture') if dish.picture.url.present? %>
   </span>
+  <%= render 'users/favorite_form' %>
   <span class="description"><%= dish.description %></span><br>
   <span class="required_time">所要時間：<%= dish.required_time %>分 </span>
   <span class="popularity">人気度：<%= dish.popularity %></span><br>
