@@ -74,3 +74,4 @@ RSpec.describe User, type: :model do
       expect(user.following?(other_user)).to be_falsey
     end
   end
+end
