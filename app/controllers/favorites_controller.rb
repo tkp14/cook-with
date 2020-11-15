@@ -1,6 +1,10 @@
 class FavoritesController < ApplicationController
   before_action :logged_in_user
 
+  def index
+    @favorites = current_user.favorites
+  end
+
   def create
     @dish = Dish.find(params[:dish_id])
     @user = @dish.user
