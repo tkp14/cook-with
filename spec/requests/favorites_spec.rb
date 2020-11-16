@@ -26,7 +26,7 @@ RSpec.describe "お気に入り登録機能", type: :request do
   context "お気に入り登録処理" do
     context "ログインしている場合" do
       before do
-        login_for_requests(user)
+        login_for_request(user)
       end
 
       it "料理のお気に入り登録ができること" do
