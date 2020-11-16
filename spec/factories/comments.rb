@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :comment do
-    dish_id 1
-    user_id 1
-    content "MyText"
+    user_id { 1 }
+    content { "辛くし過ぎたので、次は辛さ控えめにする。" }
+    association :dish
   end
 end
