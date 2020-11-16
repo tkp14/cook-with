@@ -7,6 +7,12 @@
     <div class="col-md-8">
       <span class="comment"><%= comment.content %></span>
     </div>
+    <div class="col-md-2">
+      <% if current_user.id == comment.user_id %>
+        <%= link_to "削除", comment_path(comment), method: :delete,
+                                      data: { confirm: "本当に削除しますか？" } %>
+      <% end %>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-2, col-md-offset-3">
