@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Dishes", type: :system do
   let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
   let!(:dish) { create(:dish, :picture, user: user) }
 
   describe "料理の登録ページ" do
@@ -159,6 +160,33 @@ RSpec.describe "Dishes", type: :system do
         click_on '削除'
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content '料理が削除されました'
+      end
+    end
+
+    context "コメントの登録＆削除" do
+      it "自分の料理に対するコメントの登録＆削除が正常に完了すること" do
+        login_for_system(user)
+        visit dish_path(dish)
+        fill_in "comment_content", with: "今日の味付けは大成功"
+        click_button "コメント"
+        within find("#comment-#{Comment.last.id}") do
+          expect(page).to have_selector 'span', text: user.name
+          expect(page).to have_selector 'span', text: '今日の味付けは大成功'
+        end
+        expect(page).to have_content "コメントを追加しました！"
+        click_link "削除", href: comment_path(Comment.last)
+        expect(page).not_to have_selector 'span', text: '今日の味付けは大成功'
+        expect(page).to have_content "コメントを削除しました"
+      end
+
+      it "別ユーザーの料理のコメントには削除リンクが無いこと" do
+        login_for_system(other_user)
+        visit dish_path(dish)
+        within find("#comment-#{comment.id}") do
+          expect(page).to have_selector 'span', text: user.name
+          expect(page).to have_selector 'span', text: comment.content
+          expect(page).not_to have_link '削除', href: dish_path(dish)
+        end
       end
     end
   end

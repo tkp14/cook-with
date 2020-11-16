@@ -19,12 +19,12 @@ RSpec.describe Comment, type: :model do
     end
 
     it "内容がnilの場合無効であること" do
-      comment = build(:comment, context: nil)
+      comment = build(:comment, content: nil)
       expect(comment).not_to be_valid
     end
 
     it "内容が50文字以内であること" do
-      comment = build(:comment, context: "あ" * 51)
+      comment = build(:comment, content: "あ" * 51)
       comment.valid?
       expect(comment.errors[:content]).to include("は50文字以内で入力してください")
     end
