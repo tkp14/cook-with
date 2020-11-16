@@ -8,7 +8,7 @@ RSpec.describe "Relationships", type: :system do
   let!(:dish) { create(:dish, user: user) }
   let!(:dish2) { create(:dish, user: user2) }
   let!(:dish3) { create(:dish, user: user3) }
-  
+
   describe "フォロー中(following一覧)ページ" do
     before do
       create(:relationship, follower_id: user.id, followed_id: user2.id)
