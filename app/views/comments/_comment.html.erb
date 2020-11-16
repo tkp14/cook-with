@@ -1,0 +1,16 @@
+<% comment_user = User.find(comment.user_id) %>
+<li id="comment-<%= comment.id %>">
+  <div class="row">
+    <div class="col-md-2">
+      <span class="user"><%= link_to comment_user.name, comment_user %></span>
+    </div>
+    <div class="col-md-8">
+      <span class="comment"><%= comment.content %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2, col-md-offset-3">
+      <span class="comment-create-at"><%= time_ago_in_words(comment.created_at) %>前</span>
+    </div>
+  </div>
+</li>
