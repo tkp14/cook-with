@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "お気に入り登録機能", type: :request do
   let!(:user) { create(:user) }
-  let!(:other_user) { create(:user) }
+  let!(:dish) { create(:dish) }
 
   context "お気に入り一覧ページの表示" do
     context "ログインしている場合" do
@@ -37,7 +37,7 @@ RSpec.describe "お気に入り登録機能", type: :request do
 
       it "料理のAjaxによるお気に入りができること" do
         expect {
-          post "/favorites/#{dish.id}/create",xhr: true
+          post "/favorites/#{dish.id}/create", xhr: true
         }.to change(user.favorites, :count).by(1)
       end
 
@@ -51,7 +51,7 @@ RSpec.describe "お気に入り登録機能", type: :request do
       it "料理のAjaxによるお気に入り解除ができること" do
         user.favorite(dish)
         expect {
-          delete "/favorites/#{dish.id}/destroy",xhr: true
+          delete "/favorites/#{dish.id}/destroy", xhr: true
         }.to change(user.favorites, :count).by(-1)
       end
     end
