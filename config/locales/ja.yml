@@ -9,6 +9,7 @@ ja:
     models:
       user: ユーザー
       dish: 料理
+      comment: コメント
     attributes:
       user:
         id: ID
@@ -32,6 +33,10 @@ ja:
         user_id: 作成者のID
         cook_memo: クックメモ
         picture: 料理の写真
+      comment:
+        user_id: コメント投稿者のID
+        dish_id: コメントされた料理のID
+        content: コメント
   date:
     abbr_day_names:
     - 日
