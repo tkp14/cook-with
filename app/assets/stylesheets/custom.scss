@@ -330,3 +330,9 @@ a.like, a.unlike {
     border-top: 1px solid #e8e8e8;
   }
 }
+
+////通知 ////
+// 新しい通知があるときは赤文字にする
+li.new_notification > a > span {
+  color: red;
+}
