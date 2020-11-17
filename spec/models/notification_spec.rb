@@ -4,7 +4,7 @@ RSpec.describe Notification, type: :model do
   let!(:notification) { create(:notification) }
 
   it "通知機能がが有効であること" do
-    expect(notification).to be_vaid
+    expect(notification).to be_valid
   end
 
   it "user_idがnilの場合、無効であること" do
