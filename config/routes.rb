@@ -20,4 +20,7 @@ Rails.application.routes.draw do
   delete "favorites/:dish_id/destroy" => "favorites#destroy"
   resources :comments, only: [:create, :destroy]
   resources :notifications, only: :index
+  get :lists, to: 'lists#index'
+  post   "lists/:dish_id/create"  => "lists#create"
+  delete "lists/:list_id/destroy" => "lists#destroy"
 end
