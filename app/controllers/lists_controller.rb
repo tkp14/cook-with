@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   before_action :logged_in_user
 
   def index
+    @lists = current_user.lists
   end
 
   def create
