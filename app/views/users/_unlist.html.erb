@@ -1,0 +1,7 @@
+<% list = List.find_by(dish_id: @dish.id) %>
+<%= link_to "/lists/#{list.id}/destroy",
+            method: :delete,
+            class: 'unlist',
+            remote: true do %>
+  <div class="list-btn-unlist"><i class="fas fa-list-alt"></i> 作る予定リストに追加済み</div>
+<% end %>

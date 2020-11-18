@@ -1,0 +1,6 @@
+<%= link_to "/lists/#{@dish.id}/create",
+            method: :post,
+            class: 'list',
+            remote: true do %>
+  <div class="list-btn-list"><i class="fas fa-list-alt"></i> 作る予定リストに追加する</div>
+<% end %>
