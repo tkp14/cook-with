@@ -1,5 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe List, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let!(:lists) { create(:lists) }
+
+  it "リストが有効であること" do
+    expect(list).to be_valid
+  end
+
+  it "user_idがnilの場合、無効であること" do
+    list.user_id = nil
+    expect(list).not_to be_valid
+  end
+
+  it "dish_idがnilの場合、無効であること" do
+    list.dish_id = nil
+    expect(list).not_to be_valid
+  end
+
+  it "from_user_idがnilの場合、無効であること" do
+    list.from_user_id = nil
+    expect(list).not_to be_valid
+  end
 end
