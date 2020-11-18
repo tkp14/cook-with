@@ -109,7 +109,7 @@ class User < ApplicationRecord
   def list?(dish)
     !List.find_by(dish_id: dish.id, from_user_id: id).nil?
   end
-  
+
   private
   def downcase_email
     self.email = email.downcase
