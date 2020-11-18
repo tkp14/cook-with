@@ -1,2 +1,12 @@
-<h1>Lists#index</h1>
-<p>Find me in app/views/lists/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>　作る予定リスト (<%= @lists.count %>)</h3>
+    </div>
+  </div>
+  <% if @lists.present? %>
+    <ol class="lists">
+      <%= render @lists %>
+    </ol>
+  <% end %>
+</div>

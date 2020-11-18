@@ -1,0 +1,28 @@
+<% @list = list %>
+<% @dish = Dish.find(list.dish_id) %>
+<% user = User.find(list.from_user_id) %>
+<li id="list-<%= @dish.id %>">
+  <div class="list-dish">
+    <p><%= list.created_at.strftime("%Y/%m/%d(%a) %H:%M") %> </p>
+    <% if list.user_id == list.from_user_id %>
+      <p class="list-message">この料理を作る予定リストに追加しました。</p>
+    <% else %>
+      <p class="list-message"><%= link_to user.name, user_path(user) %>さんがこの料理を作る予定リストに追加しました。</p>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <%= link_to((image_tag @dish.picture.url), dish_path(@dish), class: 'dish-picture') %>
+    </div>
+    <div class="col-md-7">
+      <p><%= link_to @dish.name, dish_path(@dish) %></p>
+      <p class="list-dish-description"><%= @dish.description %></p>
+    </div>
+    <div class="col-md-3">
+      <%= link_to "リストから削除", "/lists/#{list.id}/destroy",
+                             method: :delete,
+                             class: "unlist",
+                             data: { confirm: "本当にリストから削除しますか？" } %>
+    </div>
+  </div>
+</li>
