@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe List, type: :model do
-  let!(:lists) { create(:lists) }
+  let!(:list) { create(:list) }
 
   it "リストが有効であること" do
     expect(list).to be_valid
