@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :log do
-    dish_id 1
-    content "MyText"
+    content { "醤油はほんとにちょっとだけでOK！" }
+    association :dish
   end
 end
