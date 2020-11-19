@@ -18,18 +18,18 @@ RSpec.describe "ログ機能", type: :request do
         expect(response).to redirect_to login_path
       end
     end
+  end
 
-    context "ログ削除" do
-      context "ログインしている場合" do
-      end
+  context "ログ削除" do
+    context "ログインしている場合" do
+    end
 
-      context "ログインしていない場合" do
-        it "削除出来ずログインページへリダイレクトされること" do
-          expect {
-          delete log_path(log)
-          }.not_to change(dish.logs, :count)
-          expect(response).to redirect_to login_path
-        end
+    context "ログインしていない場合" do
+      it "削除出来ずログインページへリダイレクトされること" do
+        expect {
+        delete log_path(log)
+        }.not_to change(dish.logs, :count)
+        expect(response).to redirect_to login_path
       end
     end
   end
