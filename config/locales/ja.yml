@@ -10,6 +10,7 @@ ja:
       user: ユーザー
       dish: 料理
       comment: コメント
+      log: ログ
     attributes:
       user:
         id: ID
@@ -37,6 +38,9 @@ ja:
         user_id: コメント投稿者のID
         dish_id: コメントされた料理のID
         content: コメント
+      log:
+        dish_id: ログをつける料理のID
+        content: メモ
   date:
     abbr_day_names:
     - 日
