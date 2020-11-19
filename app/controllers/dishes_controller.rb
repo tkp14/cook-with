@@ -5,6 +5,7 @@ class DishesController < ApplicationController
   def show
     @dish = Dish.find(params[:id])
     @comment = Comment.new
+    @log = Log.new
   end
 
   def new
