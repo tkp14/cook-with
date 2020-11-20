@@ -1,5 +1,6 @@
 <% provide(:title, "#{@dish.name}") %>
 <% @comments = @dish.feed_comment(@dish.id) %>
+<% @logs = @dish.feed_log(@dish.id) %>
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -37,6 +38,7 @@
       </div>
       <% if current_user == @dish.user %>
         <div class="log">
+          <%= render "logs/feed_logs" %>
           <%= render "logs/new" %>
         </div>
       <% end %>
