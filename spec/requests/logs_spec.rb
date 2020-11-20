@@ -33,4 +33,3 @@ RSpec.describe "ログ機能", type: :request do
       end
     end
   end
-end
