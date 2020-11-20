@@ -1,5 +1,6 @@
 class LogsController < ApplicationController
   before_action :logged_in_user
+  before_action :correct_user, only: :create
 
   def create
     @dish = Dish.find(params[:dish_id])
@@ -17,5 +18,13 @@ class LogsController < ApplicationController
       flash[:success] = "ログを削除しました！"
     end
     redirect_to dish_url(@dish)
+  end
+
+  private
+
+  def correct_user
+    # 現在のユーザーが対象の料理を保有しているかどうか確認
+    dish = current_user.dishes.find_by(id: params[:dish_id])
+    redirect_to root_url if dish.nil?
   end
 end
