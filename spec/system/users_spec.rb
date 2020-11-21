@@ -116,7 +116,7 @@ RSpec.describe "Users", type: :system do
 
     context "アカウント削除処理", js: true do
       it "正しく削除できること" do
-        click_link "アカウントを削除する"
+        click_link 'アカウントを削除する'
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content "自分のアカウントを削除しました"
       end
