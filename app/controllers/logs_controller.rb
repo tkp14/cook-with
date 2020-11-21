@@ -7,6 +7,8 @@ class LogsController < ApplicationController
     @log = @dish.logs.build(content: params[:log][:content])
     @log.save
     flash[:success] = "ログを追加しました！"
+    # リスト一覧ページからクックログが作成された場合、その料理をリストから削除
+    List.find(params[:list_id]).destroy unless params[:list_id].nil?
     redirect_to dish_path(@dish)
   end
 
