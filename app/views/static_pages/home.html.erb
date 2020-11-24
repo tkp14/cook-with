@@ -1,20 +1,34 @@
 <% if logged_in? %>
-  <div class="container">
-    <div class="row">
+  <div id="fh5co-portfolio">
+    <div class="container">
       <div class="col-md-9">
         <h3>みんなの料理 (<%= @feed_items.count %>)</h3>
         <%= render 'shared/feed' %>
       </div>
       <div class="col-md-3">
-        <p><%= link_to "新しい料理を作る", new_dish_path, class: "btn btn-primary btn-lg btn-record" %></p>
-  	  </div>
+        <p><%= link_to "新しい料理を作る", new_dish_path, class: "btn btn-primary btn-lg btn-demo btn-record" %></p>
+      </div>
     </div>
   </div>
 <% else %>
-  <center>
-    <h1>クック-ウィズへようこそ！</h1>
-    <h2>『今日何作ろう？』こんなお悩みありませんか？<br>
-        このアプリではそんなお悩みがすぐに解決しちゃうかも！？</h2>
-    <h3>ぜひお試しあれ！</h3>
-  </center>
+  <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          <div class="display-t js-fullheight">
+            <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+              <h1>『今日何作ろう？』<br>
+              こんなお悩みありませんか？</h1>
+              <h2>このアプリではそんなお悩みが解決しちゃうかも！？</h2>
+              <h2>↓今すぐ始めよう↓</h2>
+              <p>
+                <%= link_to 'クック-ウィズを始める', signup_path, class: "btn btn-primary btn-lg btn-demo" %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 <% end %>
