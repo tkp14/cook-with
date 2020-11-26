@@ -347,6 +347,25 @@ a.list, a.unlist {
   padding-bottom: 0;
 }
 
+#fh5co-portfolio {
+  padding: 0;
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  h3 {
+    text-align: left;
+  }
+}
+
+#logo {
+ img {
+   max-width: 100%;
+   height: auto;
+   box-sizing: border-box;
+ }
+}
+
 //// ヘッダー ////
 .menu-1 a:hover {
   text-decoration: none;
@@ -356,13 +375,6 @@ a.list, a.unlist {
 // 上下幅
 .fh5co-nav .top-menu {
   padding: 18px 0;
-}
- #logo {
-  img {
-    max-width: 100%;
-    height: auto;
-    box-sizing: border-box;
-  }
 }
 
 // ロゴの上下位置調整
