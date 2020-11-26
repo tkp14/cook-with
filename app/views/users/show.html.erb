@@ -1,35 +1,51 @@
 <% provide(:title, "プロフィール") %>
-<div class="container">
-  <h3 class="title-profile">プロフィール</h3>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="user-picture-box">
-        <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
+<div id="fh5co-portfolio">
+  <div class="container">
+    <div class="row profile">
+      <div class="col-md-9">
+        <h3 class="title-profile">プロフィール</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="user-picture-box">
+              <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <h4 class="show-user-name"><%= @user.name %></h4>　<%= @user.sex %>
+            <div class="show-user-introduction">
+              <%= @user.introduction %>
+            </div>
+            <section class="stats">
+              <%= render 'shared/stats' %>
+            </section>
+            <% if current_user == @user %>
+              <div class="account-edit"><%= link_to "プロフィール編集", edit_user_path(@user) %></div>
+            <% end %>
+            <% if current_user.admin? || (current_user == @user) %>
+              <div class="account-delete"><%= link_to "アカウント削除", user_path(@user), method: :delete,
+                                            data: { confirm: "本当に削除しますか？" } %></div>
+            <% end %>
+            <br>
+            <%= render 'follow_form' if logged_in? %>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-8">
-      <h4 class="show-user-name"><%= @user.name %></h4> <%= @user.sex %>
-      <div>
-        <%= @user.introduction %>
+    <div class="row">
+      <div class="col-md-9">
+        <% if @user.dishes.any? %>
+          <h3>料理 (<%= @user.dishes.count %>)</h3>
+          <ol class="dishes">
+            <%= render @dishes %>
+          </ol>
+          <%= will_paginate @dishes %>
+        <% end %>
       </div>
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
-      <% if current_user == @user %>
-        <div class="account-edit"><%= link_to "プロフィール編集", edit_user_path(@user) %></div>
-      <% end %>
-      <%= render 'follow_form' if logged_in? %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-9">
-      <% if @user.dishes.any? %>
-        <h3>料理 (<%= @user.dishes.count %>)</h3>
-        <ol class="dishes">
-          <%= render @dishes %>
-        </ol>
-        <%= will_paginate @dishes %>
-      <% end %>
+      <div class="col-md-3">
+        <p><%= link_to "新しい料理を作る", record_dish_path, class: "btn btn-primary btn-lg btn-demo btn-record" %></p>
+        <br>
+        <p><%= link_to "みんなの料理をCSV出力", dishes_path(format: :csv), class: "btn btn-primary btn-lg btn-demo btn-csv" %></p>
+      </div>
     </div>
   </div>
 </div>
