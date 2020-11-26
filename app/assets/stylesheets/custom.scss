@@ -392,3 +392,35 @@ a.list, a.unlist {
   padding: 1em 0;
   border-top: 1px solid #eaeaea;
 }
+
+// 料理一覧
+.dish-user {
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+h3.dish-name {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.dish-description {
+  margin-top: 10px;
+}
+
+// お気に入り
+.cook-user {
+ margin-bottom: 20px;
+}
+
+// リスト
+.list-button {
+ margin-bottom: 20px;
+}
+
+// ログ
+.add-cooklog {
+ font-weight: bold;
+}
