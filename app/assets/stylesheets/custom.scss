@@ -6,15 +6,6 @@
   box-sizing:         border-box;
 }
 
- #logo {
-  float: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  img {
-    width: 150px;
-  }
-}
-
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -354,4 +345,27 @@ a.list, a.unlist {
 #fh5co-wireframe {
   padding-top: 7em;
   padding-bottom: 0;
+}
+
+//// ヘッダー ////
+.menu-1 a:hover {
+  text-decoration: none;
+  text-decoration-width: 1px;
+}
+
+// 上下幅
+.fh5co-nav .top-menu {
+  padding: 18px 0;
+}
+ #logo {
+  img {
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+  }
+}
+
+// ロゴの上下位置調整
+.fh5co-nav #fh5co-logo {
+  font-size: 0px;
 }

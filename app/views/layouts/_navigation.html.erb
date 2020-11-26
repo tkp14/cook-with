@@ -1,35 +1,53 @@
-<header class="navbar navbar-fixed-top">
-  <div class="container">
-    <%= link_to(image_tag("header_logo.jpg", :alt => ""), root_url, id: 'logo') %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to 'クック-ウィズとは？', about_path %></li>
-        <% if logged_in? %>
-          <% if current_user.notification == true %>
-            <li class="new_notification header-link">
-          <% else %>
-            <li class="no_notification header-link">
-          <% end %>
-          <%= link_to notifications_path do %><span>通知</span><% end %>
-          </li>
-          <li><%= link_to 'お気に入り', favorites_path %></li>
-          <li><%= link_to '作る予定リスト', lists_path %></li>
-          <li><%= link_to 'ユーザー一覧', users_path %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              アカウント <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to 'プロフィール', current_user %></li>
-              <li class="divider"></li>
-              <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to 'ユーザー登録(無料)', signup_path %></li>
-          <li><%= link_to 'ログイン', login_path %></li>
-        <% end %>
-      </ul>
-    </nav>
+<nav class="fh5co-nav navbar-fixed-top" role="navigation">
+  <div class="top-menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-2">
+          <div id="fh5co-logo">
+            <%= link_to(image_tag("/images/header_logo.jpg", :alt => "header-logo"), root_url, id: 'logo') %>
+          </div>
+        </div>
+        <div class="col-xs-10 text-right menu-1">
+          <ul>
+            <% if logged_in? %>
+              <% if current_user.notification == true %>
+                <li class="new_notification header-link">
+              <% else %>
+                <li class="no_notification header-link">
+              <% end %>
+              <%= link_to notifications_path do %><span class="fas fa-bell"></span> <span>通知</span><% end %>
+              </li>
+              <li class="header-link">
+                <%= link_to favorites_path do %><span class="fas fa-heart"></span> <span>お気に入り</span><% end %>
+              </li>
+              <li class="header-link">
+                <%= link_to lists_path do %><span class="fas fa-list-alt"></span> <span>作る予定リスト</span><% end %>
+              </li>
+              <li class="has-dropdown">
+                <%= link_to current_user do %>
+                  <span class="fas fa-user-cog"></span>
+                <% end %>
+                <ul class="dropdown">
+                  <li><%= link_to 'プロフィール', current_user %></li>
+                  <li><%= link_to 'ユーザー一覧', users_path %></li>
+                  <li><%= link_to 'クック-ウィズとは？', about_path %></li>
+                  <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+                </ul>
+              </li>
+            <% else %>
+              <li class="header-link">
+                <%= link_to about_path do %><span class="fas fa-question-circle"></span> <span>クック-ウィズとは？</span><% end %>
+              </li>
+              <li class="header-link">
+                <%= link_to signup_path do %><span class="fas fa-user-plus"></span> <span>ユーザー登録(無料)</span><% end %>
+              </li>
+              <li class="header-link btn-cta">
+                <%= link_to login_path do %><span> ログイン</span><% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-</header>
+</nav>
