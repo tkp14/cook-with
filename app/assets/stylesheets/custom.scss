@@ -1,3 +1,5 @@
+$main-magenta: #dd356e;
+$main-orange: #FFC500;
 
 // ミックスイン
 @mixin box_sizing {
@@ -423,4 +425,18 @@ h3.dish-name {
 // ログ
 .add-cooklog {
  font-weight: bold;
+}
+
+.btn-record {
+  margin-top: 3em;
+  color: black;
+  background-color: $main-orange;
+  border-color: $main-orange;
+}
+
+// 「CSV出力」ボタン
+.btn-csv {
+  color: black;
+  background-color: lightpink;
+  border-color: lightpink;
 }
