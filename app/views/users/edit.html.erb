@@ -28,7 +28,7 @@
           <%= f.label :sex %>　<span class="input-unneed">※任意</span>
           <%= f.text_field :sex, class: 'form-control', id: 'user_sex' %>
         </div>
-        <%= f.submit "更新する", class: "btn btn-primary" %>
+        <%= f.submit "更新する", class: "btn btn-mini" %>
         <p></p>
         <%= link_to "アカウントを削除する", user_path(@user), method: :delete,
                                     data: { confirm: "本当にこのアカウントを削除してよろしいですか？" } %>

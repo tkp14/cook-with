@@ -1,5 +1,3 @@
-$main-magenta: #dd356e;
-$main-orange: #FFC500;
 
 // ミックスイン
 @mixin box_sizing {
@@ -132,12 +130,6 @@ span.picture {
   }
 }
 
-//// トップページ（ログイン後） ////
-// 「新しい料理を作る」ボタン
-.btn-record {
-  margin-top: 3em;
-}
-
 //// 料理登録ページ ////
 .input-need {
   color: red;
@@ -268,6 +260,7 @@ h2.dish-name {
 // お気に入り
 .like-btn-unlike {
   color: red;
+  font-weight: bolder;
 }
 .like-btn-like {
   color: grey;
@@ -309,8 +302,9 @@ li.new_notification > a > span {
 
 //// リスト ////
 .list-btn-unlist {
-  color: red;
+  color: forestgreen;
   margin: 10px 0;
+  font-weight: bolder;
 }
 
 .list-btn-list {
@@ -443,11 +437,12 @@ h3.dish-name {
  font-weight: bold;
 }
 
+//// 「新しい料理を作る」ボタン ////
 .btn-record {
   margin-top: 3em;
   color: black;
-  background-color: $main-orange;
-  border-color: $main-orange;
+  background-color: peachpuff;
+  border-color: peachpuff;
 }
 
 // 「CSV出力」ボタン
@@ -455,4 +450,15 @@ h3.dish-name {
   color: black;
   background-color: lightpink;
   border-color: lightpink;
+}
+
+.btn-mini {
+  color: #fff;
+  background-color: #f57a00;
+  border-color: #f57a00;
+  &:hover, &:focus, &:active {
+  color: #fff;
+	background: lighten(#f57a00, 15%)!important;
+	border-color: lighten(#f57a00, 15%)!important;
+  }
 }

@@ -7,7 +7,7 @@ $grid-gutter-width: 40px !default;
 $border-radius-base:  4px !default;
 $padding-base-vertical: 14px !default;
 
-$brand-primary: #DD356E !default;
+$brand-orange: #f57a00 !default;
 $brand-secondary: #FEE856 !default;
 $brand-tertiary: #2A528A !default;
 
@@ -21,7 +21,7 @@ $brand-selection-color: #f9f6f0;
 $brand-overlay-color: #4c4a8a;
 $brand-bg-color: $brand-white;
 
-$input-border-focus:  $brand-primary !default;
+$input-border-focus:  #337ab7 !default;
 $form-group-margin-bottom:       30px !default;
 
 
@@ -215,7 +215,7 @@ h1, h2, h3, h4, h5, h6, figure {
 				color: rgba(0,0,0,.7);
 				@include transition(.5s);
 				&:hover,&:focus, &:active {
-					color: rgba(0,0,0,1);
+					color: $brand-orange;
 				}
 			}
 			&.has-dropdown {
@@ -285,7 +285,8 @@ h1, h2, h3, h4, h5, h6, figure {
 					padding: 30px 0px !important;
 					color: $brand-white;
 					span {
-						background: rgba($brand-primary,1);
+						color: #fff;
+						background: rgba($brand-orange,1);
 						padding: 4px 10px;
 						@include inline-block;
 						@include transition(.3s);
@@ -312,7 +313,7 @@ h1, h2, h3, h4, h5, h6, figure {
 						content: '';
 						width: 30px;
 						height: 2px;
-						background: $brand-primary;
+						background: $brand-orange;
 						margin: 0 auto;
 					}
 				}
@@ -413,7 +414,7 @@ h1, h2, h3, h4, h5, h6, figure {
 		}
 		.btn {
 			padding: 15px 30px;
-			// background: $brand-primary!important;
+			// background: $brand-orange!important;
 			color: $brand-white;
 			border: none!important;
 			font-size: 18px;
@@ -434,15 +435,15 @@ h1, h2, h3, h4, h5, h6, figure {
 				color: $brand-white !important;
 			}
 			&.btn-demo{
-				background: rgba($brand-primary,1);
+				background: rgba($brand-orange,1);
 				border: none;
 				&:hover, &:focus{
-					background: rgba($brand-primary,.9) !important;
+					background: rgba($brand-orange,.9) !important;
 					color: $brand-white !important;
 				}
 			}
 			&:hover {
-				background: $brand-primary!important;
+				background: $brand-orange!important;
 				-webkit-box-shadow: 0px 14px 30px -15px rgba(0,0,0,0.75)!important;
 				-moz-box-shadow: 0px 14px 30px -15px rgba(0,0,0,0.75)!important;
 				box-shadow: 0px 14px 30px -15px rgba(0,0,0,0.75)!important;
@@ -588,7 +589,7 @@ h1, h2, h3, h4, h5, h6, figure {
 	background: url(../images/loader.gif) no-repeat center center;
 	.btn {
 		font-size: 24px;
-		&.btn-primary {
+		&.btn-orange {
 			padding: 14px 30px!important;
 		}
 	}
@@ -776,7 +777,7 @@ h1, h2, h3, h4, h5, h6, figure {
 		height: 54px;
 		border: none!important;
 		background: $brand-white;
-		color: $brand-primary;
+		color: $brand-orange;
 		font-size: 16px;
 		text-transform: uppercase;
 		font-weight: 400;
@@ -1321,7 +1322,7 @@ input[type="text"] {
 	font-family: $font-primary;
 	font-size: 16px;
 	font-weight: 400;
-	@include border-radius(30px);
+	@include border-radius(20px);
 	@include transition(.5s);
 	padding: 8px 20px;
 	&.btn-md {
@@ -1336,19 +1337,19 @@ input[type="text"] {
 	}
 }
 .btn-primary {
-	background: $brand-primary;
+	background: $brand-orange;
 	color: $brand-white;
-	border: 2px solid $brand-primary;
+	border: 2px solid $brand-orange;
 	&:hover, &:focus, &:active {
-		background: lighten($brand-primary, 5%)!important;
-		border-color: lighten($brand-primary, 5%)!important;
+		background: lighten($brand-orange, 1%)!important;
+		border-color: lighten($brand-orange, 1%)!important;
 	}
 	&.btn-outline {
 		background: transparent;
-		color: $brand-primary;
-		border: 2px solid $brand-primary;
+		color: $brand-orange;
+		border: 2px solid $brand-orange;
 		&:hover, &:focus, &:active {
-			background: $brand-primary;
+			background: $brand-orange;
 			color: $brand-white;
 		}
 	}

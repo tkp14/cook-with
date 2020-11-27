@@ -10,10 +10,10 @@
     </div>
     <div class="col-md-3">
       <% if @list.present? %>
-        <%= f.submit "追加", class: "btn btn-primary",
+        <%= f.submit "追加", class: "btn btn-mini",
                                       data: { confirm: "ログを追加し、リストから削除しますか？" } %>
       <% else %>
-        <%= f.submit "追加", class: "btn btn-primary" %>
+        <%= f.submit "追加", class: "btn btn-mini" %>
       <% end %>
     </div>
   </div>
