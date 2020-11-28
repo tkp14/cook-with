@@ -301,19 +301,11 @@ RSpec.describe "Dishes", type: :system do
       it "フィードの中から検索ワードに該当する結果が表示されること" do
         create(:dish, name: '豚キムチ炒め', user: user)
         create(:dish, name: 'キムチ鍋', user: other_user)
-        create(:dish, name: '卵焼き', user: user)
-        create(:dish, name: '茹で卵', user: other_user)
 
         # 誰もフォローしない場合
         fill_in 'q_name_cont', with: 'キムチ'
         click_button '検索'
         expect(page).to have_css 'h3', text: "”キムチ”の検索結果：1件"
-        within find('.dishes') do
-          expect(page).to have_css 'li', count: 1
-        end
-        fill_in 'q_name_cont', with: '卵'
-        click_button '検索'
-        expect(page).to have_css 'h3', text: "”卵”の検索結果：1件"
         within find('.dishes') do
           expect(page).to have_css 'li', count: 1
         end
@@ -323,12 +315,6 @@ RSpec.describe "Dishes", type: :system do
         fill_in 'q_name_cont', with: 'キムチ'
         click_button '検索'
         expect(page).to have_css 'h3', text: "”キムチ”の検索結果：2件"
-        within find('.dishes') do
-          expect(page).to have_css 'li', count: 2
-        end
-        fill_in 'q_name_cont', with: '卵'
-        click_button '検索'
-        expect(page).to have_css 'h3', text: "”卵”の検索結果：2件"
         within find('.dishes') do
           expect(page).to have_css 'li', count: 2
         end
