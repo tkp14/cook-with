@@ -3,7 +3,7 @@ User.create!(
   [
     {
       name:  "中田 順子",
-      email: "yamada@example.com",
+      email: "nakata@example.com",
       password:              "foobar",
       password_confirmation: "foobar",
       admin: true,
@@ -55,7 +55,7 @@ Dish.create!(
       required_time: 30,
       popularity: 3,
       cook_memo: cook_memo1,
-      picture: open("#{Rails.root}/public/images/dish1.jpg"),
+      picture: open("app/assets/images/dish1.jpg"),
       ingredients_attributes: [
                                 { name: "豚ロース肉", quantity: "300g" },
                                 { name: "じゃがいも", quantity: "2個" },
@@ -79,7 +79,7 @@ Dish.create!(
       required_time: 20,
       popularity: 4,
       cook_memo: cook_memo1,
-      picture: open("#{Rails.root}/public/images/dish2.jpg"),
+      picture: open("app/assets/images/dish2.jpg"),
       ingredients_attributes: [
                                 { name: "ソーセージ", quantity: "4本" },
                                 { name: "卵", quantity: "2個" },
@@ -103,7 +103,7 @@ Dish.create!(
       required_time: 15,
       popularity: 4,
       cook_memo: cook_memo1,
-      picture: open("#{Rails.root}/public/images/dish3.jpg"),
+      picture: open("app/assets/images/dish3.jpg"),
       ingredients_attributes: [
                                 { name: "卵", quantity: "6個" },
                                 { name: "かに玉の素", quantity: "1袋" },
@@ -127,7 +127,7 @@ Dish.create!(
       required_time: 20,
       popularity: 3,
       cook_memo: cook_memo2,
-      picture: open("#{Rails.root}/public/images/dish4.jpg"),
+      picture: open("app/assets/images/dish4.jpg"),
       ingredients_attributes: [
                                 { name: "豚こま切れ肉", quantity: "100g" },
                                 { name: "玉ねぎ", quantity: "1個" },
@@ -151,7 +151,7 @@ Dish.create!(
       required_time: 40,
       popularity: 5,
       cook_memo: cook_memo3,
-      picture: open("#{Rails.root}/public/images/dish5.jpg"),
+      picture: open("app/assets/images/dish5.jpg"),
       ingredients_attributes: [
                                 { name: "鶏肉", quantity: "100g" },
                                 { name: "チーズ", quantity: "3枚" },
@@ -175,7 +175,7 @@ Dish.create!(
       required_time: 30,
       popularity: 3,
       cook_memo: cook_memo2,
-      picture: open("#{Rails.root}/public/images/dish6.jpg"),
+      picture: open("app/assets/images/dish6.jpg"),
       ingredients_attributes: [
                                 { name: "鶏胸肉", quantity: "300g" },
                                 { name: "塩", quantity: "少々" },
@@ -199,7 +199,7 @@ Dish.create!(
       required_time: 20,
       popularity: 5,
       cook_memo: cook_memo1,
-      picture: open("#{Rails.root}/public/images/dish7.jpg"),
+      picture: open("app/assets/images/dish7.jpg"),
       ingredients_attributes: [
                                 { name: "鶏肉", quantity: "250g" },
                                 { name: "味噌", quantity: "大さじ1" },
@@ -223,7 +223,7 @@ Dish.create!(
       required_time: 30,
       popularity: 4,
       cook_memo: cook_memo2,
-      picture: open("#{Rails.root}/public/images/dish8.jpg"),
+      picture: open("app/assets/images/dish8.jpg"),
       ingredients_attributes: [
                                 { name: "レタス", quantity: "1/4個" },
                                 { name: "しゃぶしゃぶ用豚肉", quantity: "100g" },
@@ -247,7 +247,7 @@ Dish.create!(
       required_time: 20,
       popularity: 5,
       cook_memo: cook_memo3,
-      picture: open("#{Rails.root}/public/images/dish9.jpg"),
+      picture: open("app/assets/images/dish9.jpg"),
       ingredients_attributes: [
                                 { name: "卵", quantity: "2個" },
                                 { name: "とろけるチーズ", quantity: "大さじ2" },
@@ -271,7 +271,7 @@ Dish.create!(
       required_time: 20,
       popularity: 5,
       cook_memo: cook_memo1,
-      picture: open("#{Rails.root}/public/images/dish10.jpg"),
+      picture: open("app/assets/images/dish10.jpg"),
       ingredients_attributes: [
                                 { name: "卵", quantity: "4個" },
                                 { name: "じゃがいも", quantity: "1個" },
@@ -295,7 +295,7 @@ Dish.create!(
       required_time: 40,
       popularity: 3,
       cook_memo: cook_memo1,
-      picture: open("#{Rails.root}/public/images/dish11.jpg"),
+      picture: open("app/assets/images/dish11.jpg"),
       ingredients_attributes: [
                                 { name: "ブリ", quantity: "6枚" },
                                 { name: "しょうゆ", quantity: "40ml" },
@@ -319,7 +319,7 @@ Dish.create!(
       required_time: 40,
       popularity: 4,
       cook_memo: cook_memo2,
-      picture: open("#{Rails.root}/public/images/dish12.jpg"),
+      picture: open("app/assets/images/dish12.jpg"),
       ingredients_attributes: [
                                 { name: "鶏肉", quantity: "500g" },
                                 { name: "玉ねぎ", quantity: "3個" },
@@ -343,7 +343,7 @@ Dish.create!(
       required_time: 20,
       popularity: 5,
       cook_memo: cook_memo3,
-      picture: open("#{Rails.root}/public/images/dish13.jpg"),
+      picture: open("app/assets/images/dish13.jpg"),
       ingredients_attributes: [
                                 { name: "牛ひき肉", quantity: "50g" },
                                 { name: "絹豆腐", quantity: "2丁" },
@@ -367,7 +367,7 @@ Dish.create!(
       required_time: 40,
       popularity: 4,
       cook_memo: cook_memo1,
-      picture: open("#{Rails.root}/public/images/dish14.jpg"),
+      picture: open("app/assets/images/dish14.jpg"),
       ingredients_attributes: [
                                 { name: "大葉", quantity: "4枚" },
                                 { name: "薄切り肉", quantity: "100g" },
@@ -391,7 +391,7 @@ Dish.create!(
       required_time: 50,
       popularity: 5,
       cook_memo: cook_memo3,
-      picture: open("#{Rails.root}/public/images/dish15.jpg"),
+      picture: open("app/assets/images/dish15.jpg"),
       ingredients_attributes: [
                                 { name: "豚肉", quantity: "150g" },
                                 { name: "ごぼう", quantity: "1/2本" },
