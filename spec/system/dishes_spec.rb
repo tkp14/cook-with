@@ -343,7 +343,8 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_css 'h3', text: "”キムチ”の検索結果：2件"
         within find('.dishes') do
           expect(page).to have_css 'li', count: 2
-
+        end
+        
         # 材料も含めて検索に引っかかること
         create(:ingredient, name: 'かにの切り身', dish: Dish.first)
         fill_in 'q_name_or_ingredients_name_cont', with: 'かに'
