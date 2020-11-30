@@ -12,6 +12,14 @@
       <h3 class="dish-name"><%= link_to dish.name, dish_path(dish) %></h3>
       <div class="dish-description"><%= dish.description %></div>
       <div class="dish-user">cooked by <%= link_to dish.user.name, user_path(dish.user) %></div>
+      <div class="dish-ingredient">
+        <p class="title-ingredient-mini">【材料】</p>
+        <% dish.ingredients.each_with_index do |ing, i| %>
+          <% if ing.name.present? %>
+            <%= "｜" unless i == 0 %><%= ing.name %>: <%= ing.quantity %>
+          <% end %>
+        <% end %>
+      </div>
       <div class="dish-other-info">
         <span class="cook_times">作った回数：<%= dish.logs.count %>回　</span>
         <span class="required_time">所要時間：<%= dish.required_time %>分　</span>

@@ -497,3 +497,12 @@ table.ingredient th, table.ingredient td {
 table.ingredient tr:nth-child(odd) {
   background-color: #eee
 }
+
+.dish-ingredient {
+  margin: 15px 0;
+}
+
+.title-ingredient-mini {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
