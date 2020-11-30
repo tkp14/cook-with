@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "料理一覧ページ", type: :request do
   let!(:user) { create(:user) }
   let!(:dish) { create(:dish, user: user) }
+  let!(:dish) { create(:dish, :ingredients, user: user) }
 
   context "ログインしている場合" do
     it "レスポンスが正常に表示されること" do
