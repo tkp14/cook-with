@@ -14,6 +14,7 @@ class DishesController < ApplicationController
 
   def new
     @dish = Dish.new
+    @dish.ingredients.build
   end
 
   def create
@@ -57,7 +58,8 @@ class DishesController < ApplicationController
 
   def dish_params
     params.require(:dish).permit(:name, :description, :portion, :tips,
-                                 :reference, :required_time, :popularity, :cook_memo, :picture)
+                                 :reference, :required_time, :popularity, :cook_memo, :picture,
+                                 ingredients_attributes: [:id, :name, :quantity])
   end
 
   def correct_user
