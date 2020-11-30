@@ -190,186 +190,186 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_content '料理が削除されました'
       end
     end
+  end
 
-    context "コメントの登録＆削除" do
-      it "自分の料理に対するコメントの登録＆削除が正常に完了すること" do
+  context "コメントの登録＆削除" do
+    it "自分の料理に対するコメントの登録＆削除が正常に完了すること" do
+      login_for_system(user)
+      visit dish_path(dish)
+      fill_in "comment_content", with: "今日の味付けは大成功"
+      click_button "コメント"
+      within find("#comment-#{Comment.last.id}") do
+        expect(page).to have_selector 'span', text: user.name
+        expect(page).to have_selector 'span', text: '今日の味付けは大成功'
+      end
+      expect(page).to have_content "コメントを追加しました！"
+      click_link "削除", href: comment_path(Comment.last)
+      expect(page).not_to have_selector 'span', text: '今日の味付けは大成功'
+      expect(page).to have_content "コメントを削除しました"
+    end
+
+    it "別ユーザーの料理のコメントには削除リンクが無いこと" do
+      login_for_system(other_user)
+      visit dish_path(dish)
+      within find("#comment-#{comment.id}") do
+        expect(page).to have_selector 'span', text: user.name
+        expect(page).to have_selector 'span', text: comment.content
+        expect(page).not_to have_link '削除', href: dish_path(dish)
+      end
+    end
+  end
+
+  context "ログ登録＆削除" do
+    context "料理詳細ページから" do
+      it "自分の料理に対するログ登録＆削除が正常に完了すること" do
         login_for_system(user)
         visit dish_path(dish)
-        fill_in "comment_content", with: "今日の味付けは大成功"
-        click_button "コメント"
-        within find("#comment-#{Comment.last.id}") do
-          expect(page).to have_selector 'span', text: user.name
-          expect(page).to have_selector 'span', text: '今日の味付けは大成功'
+        fill_in "log_content", with: "ログ投稿テスト"
+        click_button "ログ追加"
+        within find("#log-#{Log.first.id}") do
+          expect(page).to have_selector 'span', text: "#{dish.logs.count}回目"
+          expect(page).to have_selector 'span',
+                                        text: %Q(#{Log.last.created_at.strftime("%Y/%m/%d(%a)")})
+          expect(page).to have_selector 'span', text: 'ログ投稿テスト'
         end
-        expect(page).to have_content "コメントを追加しました！"
-        click_link "削除", href: comment_path(Comment.last)
-        expect(page).not_to have_selector 'span', text: '今日の味付けは大成功'
-        expect(page).to have_content "コメントを削除しました"
+        expect(page).to have_content "ログを追加しました！"
+        click_link "削除", href: log_path(Log.first)
+        expect(page).not_to have_selector 'span', text: 'ログ投稿テスト'
+        expect(page).to have_content "ログを削除しました"
       end
 
-      it "別ユーザーの料理のコメントには削除リンクが無いこと" do
+      it "別ユーザーの料理ログにはログ登録フォームが無いこと" do
         login_for_system(other_user)
         visit dish_path(dish)
-        within find("#comment-#{comment.id}") do
-          expect(page).to have_selector 'span', text: user.name
-          expect(page).to have_selector 'span', text: comment.content
-          expect(page).not_to have_link '削除', href: dish_path(dish)
-        end
+        expect(page).not_to have_button "作る"
       end
     end
 
-    context "ログ登録＆削除" do
-      context "料理詳細ページから" do
-        it "自分の料理に対するログ登録＆削除が正常に完了すること" do
-          login_for_system(user)
-          visit dish_path(dish)
-          fill_in "log_content", with: "ログ投稿テスト"
-          click_button "ログ追加"
-          within find("#log-#{Log.first.id}") do
-            expect(page).to have_selector 'span', text: "#{dish.logs.count}回目"
-            expect(page).to have_selector 'span',
-                                          text: %Q(#{Log.last.created_at.strftime("%Y/%m/%d(%a)")})
-            expect(page).to have_selector 'span', text: 'ログ投稿テスト'
-          end
-          expect(page).to have_content "ログを追加しました！"
-          click_link "削除", href: log_path(Log.first)
-          expect(page).not_to have_selector 'span', text: 'ログ投稿テスト'
-          expect(page).to have_content "ログを削除しました"
-        end
+    context "トップページから" do
+      it "自分の料理に対するログ登録が正常に完了すること" do
+        login_for_system(user)
+        visit root_path
+        fill_in "log_content", with: "ログ投稿テスト"
+        click_button "追加"
+        expect(Log.first.content).to eq 'ログ投稿テスト'
+        expect(page).to have_content "ログを追加しました！"
+      end
 
-        it "別ユーザーの料理ログにはログ登録フォームが無いこと" do
-          login_for_system(other_user)
-          visit dish_path(dish)
+      it "別ユーザーの料理にはログ登録フォームがないこと" do
+        create(:dish, user: other_user)
+        login_for_system(user)
+        user.follow(other_user)
+        visit root_path
+        within find("#dish-#{Dish.first.id}") do
           expect(page).not_to have_button "作る"
         end
       end
+    end
 
-      context "トップページから" do
-        it "自分の料理に対するログ登録が正常に完了すること" do
-          login_for_system(user)
-          visit root_path
-          fill_in "log_content", with: "ログ投稿テスト"
-          click_button "追加"
-          expect(Log.first.content).to eq 'ログ投稿テスト'
-          expect(page).to have_content "ログを追加しました！"
+    context "プロフィールページから" do
+      it "自分の料理に対するログ登録が正常に完了すること" do
+        login_for_system(user)
+        visit user_path(user)
+        fill_in "log_content", with: "ログ投稿テスト"
+        click_button "追加"
+        expect(Log.first.content).to eq 'ログ投稿テスト'
+        expect(page).to have_content "ログを追加しました！"
+      end
+    end
+
+    context "リスト一覧ページから" do
+      it "自分の料理に対するログ登録が正常に完了し、リストから料理が削除されること" do
+        login_for_system(user)
+        user.list(dish)
+        visit lists_path
+        expect(page).to have_content dish.name
+        fill_in "log_content", with: "ログ投稿テスト"
+        click_button "追加"
+        expect(Log.first.content).to eq 'ログ投稿テスト'
+        expect(page).to have_content "ログを追加しました！"
+        expect(List.count).to eq 0
+      end
+    end
+  end
+
+  context "検索機能" do
+    context "ログインしている場合" do
+      before do
+        login_for_system(user)
+        visit root_path
+      end
+
+      it "ログイン後の各ページに検索窓が表示されていること" do
+        expect(page).to have_css 'form#dish_search'
+        visit about_path
+        expect(page).to have_css 'form#dish_search'
+        visit use_of_terms_path
+        expect(page).to have_css 'form#dish_search'
+        visit users_path
+        expect(page).to have_css 'form#dish_search'
+        visit user_path(user)
+        expect(page).to have_css 'form#dish_search'
+        visit edit_user_path(user)
+        expect(page).to have_css 'form#dish_search'
+        visit following_user_path(user)
+        expect(page).to have_css 'form#dish_search'
+        visit followers_user_path(user)
+        expect(page).to have_css 'form#dish_search'
+        visit dishes_path
+        expect(page).to have_css 'form#dish_search'
+        visit dish_path(dish)
+        expect(page).to have_css 'form#dish_search'
+        visit new_dish_path
+        expect(page).to have_css 'form#dish_search'
+        visit edit_dish_path(dish)
+        expect(page).to have_css 'form#dish_search'
+      end
+
+      it "フィードの中から検索ワードに該当する結果が表示されること" do
+        create(:dish, name: '豚キムチ炒め', user: user)
+        create(:dish, name: 'キムチ鍋', user: other_user)
+
+        # 誰もフォローしない場合
+        fill_in 'q_name_or_ingredients_name_cont', with: 'キムチ'
+        click_button '検索'
+        expect(page).to have_css 'h3', text: "”キムチ”の検索結果：1件"
+        within find('.dishes') do
+          expect(page).to have_css 'li', count: 1
         end
 
-        it "別ユーザーの料理にはログ登録フォームがないこと" do
-          create(:dish, user: other_user)
-          login_for_system(user)
-          user.follow(other_user)
-          visit root_path
-          within find("#dish-#{Dish.first.id}") do
-            expect(page).not_to have_button "作る"
-          end
+        # other_userをフォローする場合
+        user.follow(other_user)
+        fill_in 'q_name_or_ingredients_name_cont', with: 'キムチ'
+        click_button '検索'
+        expect(page).to have_css 'h3', text: "”キムチ”の検索結果：2件"
+        within find('.dishes') do
+          expect(page).to have_css 'li', count: 2
+        end
+
+        # 材料も含めて検索に引っかかること
+        create(:ingredient, name: 'かにの切り身', dish: Dish.first)
+        fill_in 'q_name_or_ingredients_name_cont', with: 'かに'
+        click_button '検索'
+        expect(page).to have_css 'h3', text: "”かに”の検索結果：1件"
+        within find('.dishes') do
+          expect(page).to have_css 'li', count: 1
         end
       end
 
-      context "プロフィールページから" do
-        it "自分の料理に対するログ登録が正常に完了すること" do
-          login_for_system(user)
-          visit user_path(user)
-          fill_in "log_content", with: "ログ投稿テスト"
-          click_button "追加"
-          expect(Log.first.content).to eq 'ログ投稿テスト'
-          expect(page).to have_content "ログを追加しました！"
-        end
-      end
-
-      context "リスト一覧ページから" do
-        it "自分の料理に対するログ登録が正常に完了し、リストから料理が削除されること" do
-          login_for_system(user)
-          user.list(dish)
-          visit lists_path
-          expect(page).to have_content dish.name
-          fill_in "log_content", with: "ログ投稿テスト"
-          click_button "追加"
-          expect(Log.first.content).to eq 'ログ投稿テスト'
-          expect(page).to have_content "ログを追加しました！"
-          expect(List.count).to eq 0
+      it "検索ワードを入れずに検索ボタンを押した場合、料理一覧が表示されること" do
+        fill_in 'q_name_or_ingredients_name_cont', with: ''
+        click_button '検索'
+        expect(page).to have_css 'h1', text: "料理一覧"
+        within find('.dishes') do
+          expect(page).to have_css 'li', count: Dish.count
         end
       end
     end
 
-    context "検索機能" do
-      context "ログインしている場合" do
-        before do
-          login_for_system(user)
-          visit root_path
-        end
-
-        it "ログイン後の各ページに検索窓が表示されていること" do
-          expect(page).to have_css 'form#dish_search'
-          visit about_path
-          expect(page).to have_css 'form#dish_search'
-          visit use_of_terms_path
-          expect(page).to have_css 'form#dish_search'
-          visit users_path
-          expect(page).to have_css 'form#dish_search'
-          visit user_path(user)
-          expect(page).to have_css 'form#dish_search'
-          visit edit_user_path(user)
-          expect(page).to have_css 'form#dish_search'
-          visit following_user_path(user)
-          expect(page).to have_css 'form#dish_search'
-          visit followers_user_path(user)
-          expect(page).to have_css 'form#dish_search'
-          visit dishes_path
-          expect(page).to have_css 'form#dish_search'
-          visit dish_path(dish)
-          expect(page).to have_css 'form#dish_search'
-          visit new_dish_path
-          expect(page).to have_css 'form#dish_search'
-          visit edit_dish_path(dish)
-          expect(page).to have_css 'form#dish_search'
-        end
-
-        it "フィードの中から検索ワードに該当する結果が表示されること" do
-          create(:dish, name: '豚キムチ炒め', user: user)
-          create(:dish, name: 'キムチ鍋', user: other_user)
-
-          # 誰もフォローしない場合
-          fill_in 'q_name_or_ingredients_name_cont', with: 'キムチ'
-          click_button '検索'
-          expect(page).to have_css 'h3', text: "”キムチ”の検索結果：1件"
-          within find('.dishes') do
-            expect(page).to have_css 'li', count: 1
-          end
-
-          # other_userをフォローする場合
-          user.follow(other_user)
-          fill_in 'q_name_or_ingredients_name_cont', with: 'キムチ'
-          click_button '検索'
-          expect(page).to have_css 'h3', text: "”キムチ”の検索結果：2件"
-          within find('.dishes') do
-            expect(page).to have_css 'li', count: 2
-          end
-
-          # 材料も含めて検索に引っかかること
-          create(:ingredient, name: 'かにの切り身', dish: Dish.first)
-          fill_in 'q_name_or_ingredients_name_cont', with: 'かに'
-          click_button '検索'
-          expect(page).to have_css 'h3', text: "”かに”の検索結果：1件"
-          within find('.dishes') do
-            expect(page).to have_css 'li', count: 1
-          end
-        end
-
-        it "検索ワードを入れずに検索ボタンを押した場合、料理一覧が表示されること" do
-          fill_in 'q_name_or_ingredients_name_cont', with: ''
-          click_button '検索'
-          expect(page).to have_css 'h3', text: "料理一覧"
-          within find('.dishes') do
-            expect(page).to have_css 'li', count: Dish.count
-          end
-        end
-      end
-
-      context "ログインしていない場合" do
-        it "検索窓が表示されないこと" do
-          visit root_path
-          expect(page).not_to have_css 'form#dish_search'
-        end
+    context "ログインしていない場合" do
+      it "検索窓が表示されないこと" do
+        visit root_path
+        expect(page).not_to have_css 'form#dish_search'
       end
     end
   end
