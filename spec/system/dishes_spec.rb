@@ -26,19 +26,30 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_content '料理名'
         expect(page).to have_content '説明'
         expect(page).to have_content '分量 [人分]'
+        expect(page).to have_css 'label[for=dish_ingredients_attributes_0_name]',
+                               text: '材料（10種類まで登録可）', count: 1
+        expect(page).to have_css 'label[for=dish_ingredients_attributes_0_quantity]',
+                               text: '量', count: 1
         expect(page).to have_content 'コツ・ポイント'
         expect(page).to have_content '作り方参照用URL'
         expect(page).to have_content '所要時間 [分]'
         expect(page).to have_content '人気度 [1~5]'
         expect(page).to have_content 'クックメモ'
       end
+
+      it "材料入力部分が10行表示されること" do
+        expect(page).to have_css 'input.ingredient_name', count: 10
+        expect(page).to have_css 'input.ingredient_quantity', count: 10
+      end
     end
 
-    context "ユーザー登録処理" do
+    context "料理登録処理" do
       it "有効な情報で料理登録を行うと料理登録成功のフラッシュが表示されること" do
         fill_in "料理名", with: "イカの塩焼き"
         fill_in "説明", with: "冬に食べたくなる、身体が温まる料理です"
         fill_in "分量", with: 1.5
+        fill_in "dish[ingredients_attributes][0][name]", with: "豆腐"
+        fill_in "dish[ingredients_attributes][0][quantity]", with: "2個"
         fill_in "コツ・ポイント", with: "ピリッと辛めに味付けするのがオススメ"
         fill_in "作り方参照用URL", with: "https://cookpad.com/recipe/2798655"
         fill_in "所要時間", with: 30
