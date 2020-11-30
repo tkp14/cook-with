@@ -24,6 +24,15 @@
             <%= f.label :portion %> [人分]　<span class="input-unneed">※任意</span>
             <%= f.text_field :portion, class: 'form-control', id: 'dish_portion' %>
           </div>
+          <div class="row">
+            <div class="col-md-9">
+              <p class="title-ingredient-name">材料（10種類まで登録可）　<span class="input-unneed">※任意</span></p>
+            </div>
+            <div class="col-md-3">
+              <p class="title-ingredient-quantity">量　<span class="input-unneed">※任意</span></p>
+            </div>
+          </div>
+          <%= render partial: "ingredient_form", locals: {f: f} %>
           <div class = 'form-group'>
             <%= f.label :tips %>　<span class="input-unneed">※任意</span>
             <%= f.text_field :tips, size: "30x4", class: 'form-control', id: 'dish_tips' %>
@@ -40,7 +49,7 @@
             <%= f.label :popularity %> [1~5]　<span class="input-unneed">※任意</span>
             <%= f.text_field :popularity, class: 'form-control', id: 'dish_popularity' %>
           </div>
-          <%= f.submit "更新する", class: "btn btn-primary" %>
+          <%= f.submit "更新する", class: "btn btn-mini" %>
           <p></p>
           <%= link_to "料理を削除する", dish_path(@dish), method: :delete,
                                       data: { confirm: "本当にこの料理を削除してよろしいですか？" } %>

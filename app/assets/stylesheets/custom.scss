@@ -462,3 +462,8 @@ h3.dish-name {
 	border-color: lighten(#f57a00, 15%)!important;
   }
 }
+
+//// 材料 ////
+.title-ingredient-name, .title-ingredient-quantity {
+  font-weight: bold;
+}
