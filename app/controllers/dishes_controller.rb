@@ -4,6 +4,14 @@ class DishesController < ApplicationController
 
   def index
     @log = Log.new
+    # CSV出力時のファイル名指定
+    respond_to do |format|
+      format.html
+      format.csv {
+        send_data render_to_string,
+                  filename: "みんなの料理一覧_#{Time.current.strftime('%Y%m%d_%H%M')}.csv"
+      }
+    end
   end
 
   def show
