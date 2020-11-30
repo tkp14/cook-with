@@ -94,6 +94,10 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_content dish.name
         expect(page).to have_content dish.description
         expect(page).to have_content dish.portion
+        dish.ingredients.each do |i|
+          expect(page).to have_content i.name
+          expect(page).to have_content i.quantity
+        end
         expect(page).to have_content dish.tips
         expect(page).to have_content dish.reference
         expect(page).to have_content dish.required_time
