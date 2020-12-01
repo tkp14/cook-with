@@ -61,7 +61,7 @@ group :development, :test do
   gem 'capistrano-rails-console'
   gem 'capistrano-rbenv'
   gem 'capistrano-rbenv-vars'
-  gem 'capistrano3-puma'
+  gem 'capistrano3-unicorn'
 end
 
 group :development do
