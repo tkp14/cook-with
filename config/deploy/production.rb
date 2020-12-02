@@ -1,7 +1,5 @@
-server '52.196.123.212', user: "takaP", roles: %w{app db web}
+server '52.196.123.212', user: "deploy", roles: %w{app db web}
 
-set :ssh_options, {
-  keys: ["#{ENV.fetch('PRODUCTION_SSH_KEY')}"],
-  forward_agent: true,
-  auth_methods: [publickey]
-}
+set :stage, :production
+set :rails_env, :production
+set :deploy_to, "/deploy/apps/cook-with"
