@@ -1,12 +1,10 @@
-require "capistrano/setup"
-require "capistrano/deploy"
-require 'capistrano/rbenv'
-require 'capistrano/bundler'
-require 'capistrano/rails/assets'
-require 'capistrano/rails/migrations'
-require 'capistrano3/unicorn'
-
-install_plugin Capistrano::SCM::Git
+require "capistrano/rails"
+require "capistrano/rails/collection"
+require "capistrano/rails/console"
+require "capistrano/rake"
+require "capistrano/rbenv"
+require "capistrano/puma"
 install_plugin Capistrano::Puma
-# Load custom tasks from `lib/capistrano/tasks` if you have any defined
+install_plugin Capistrano::Puma::Nginx
+
 Dir.glob("lib/capistrano/tasks/*.rb").each { |r| import r }

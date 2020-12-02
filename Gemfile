@@ -55,23 +55,21 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'rubocop-airbnb'
   gem "factory_bot_rails", "~> 4.10.0"
-  gem "capistrano", require: false
-  gem "capistrano-rails", require: false
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails-console'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-rbenv-vars'
-  gem 'capistrano3-unicorn'
 end
 
 group :development do
   gem 'spring-commands-rspec'
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "capistrano", require: false
+  gem "capistrano-rails", require: false
+  gem "capistrano-rails-collection", require: false
+  gem "capistrano-rails-console", require: false
+  gem "capistrano-rake", require: false
+  gem "capistrano-rbenv"
+  gem "capistrano3-puma"
 end
 
 group :test do
