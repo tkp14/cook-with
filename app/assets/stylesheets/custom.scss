@@ -31,6 +31,28 @@ input {
   }
 }
 
+//// トップページ（ログイン前） ////
+.recruit-login {
+  background-color: #FFFAF0;
+  margin-bottom: 30px;
+  padding: 20px;
+  border: solid 3px #000000;
+}
+
+.title-form {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.description-form {
+  margin-bottom: 20px;
+}
+
+.recruit-account {
+  margin-top: 20px;
+}
+
 .checkbox {
  margin-top: -10px;
  margin-bottom: 10px;
@@ -140,6 +162,23 @@ span.picture {
   font-size: 13px;
 }
 
+// 料理一覧
+.dish-user {
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+h3.dish-name {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.dish-description {
+  margin-top: 10px;
+}
+
 //// 料理個別ページ ////
 .dish-user-name {
   display: inline-block;
@@ -210,6 +249,7 @@ h2.dish-name {
   box-sizing: border-box;
 }
 
+// コメント //
 .title-comment {
   font-weight: bold;
   font-size: 17px;
@@ -231,6 +271,7 @@ h2.dish-name {
   color: grey;
 }
 
+// ログ //
 .title-log {
   font-weight: bold;
   font-size: 17px;
@@ -250,6 +291,10 @@ h2.dish-name {
       font-size: 14px;
     }
   }
+}
+
+.add-cooklog {
+ font-weight: bold;
 }
 
 // フォロー、フォロワー数表示部
@@ -276,6 +321,10 @@ a.like, a.unlike {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
   }
+}
+
+.cook-user {
+ margin-bottom: 20px;
 }
 
 ////通知 ////
@@ -332,6 +381,10 @@ a.list, a.unlist {
   margin-bottom: 20px;
 }
 
+.list-button {
+ margin-bottom: 20px;
+}
+
 //// ページボディ部 ////
 #fh5co-about {
   padding: 0;
@@ -341,7 +394,6 @@ a.list, a.unlist {
   }
 }
 
-//// ページボディ部 ////
 #fh5co-wireframe {
   padding-top: 7em;
   padding-bottom: 0;
@@ -405,38 +457,6 @@ a.list, a.unlist {
   border-top: 1px solid #eaeaea;
 }
 
-// 料理一覧
-.dish-user {
-  text-align: right;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
-h3.dish-name {
-  font-size: 20px;
-  margin-top: 0;
-  margin-bottom: 5px;
-}
-
-.dish-description {
-  margin-top: 10px;
-}
-
-// お気に入り
-.cook-user {
- margin-bottom: 20px;
-}
-
-// リスト
-.list-button {
- margin-bottom: 20px;
-}
-
-// ログ
-.add-cooklog {
- font-weight: bold;
-}
-
 //// 「新しい料理を作る」ボタン ////
 .btn-record {
   margin-top: 3em;
@@ -445,7 +465,7 @@ h3.dish-name {
   border-color: peachpuff;
 }
 
-// 「CSV出力」ボタン
+// 「CSV出力」ボタン //
 .btn-csv {
   color: black;
   background-color: lightpink;
