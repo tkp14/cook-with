@@ -1,24 +1,35 @@
-# README
+# アプリケーションの概要
+作った料理を投稿して、共有できるサービスです。 https://cook-with.tk
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 技術的ポイント
+・**RSpec**でModel, Request, Systemテスト記述（計214examples）  
+・**AWS EC2/RDS**を用いたRails本番環境構築
+・**AWS ACM**でSSL証明書を発行し、SSL化
+・**独自ドメイン**を取得、使用
+・**Docker**を用いた開発環境構築
+・**circleci**を用いた自動ビルド＆テスト
+・**Ajax**を用いた非同期処理（フォロー/未フォロー、お気に入り登録/未登録などの切り替え表示）  
+・**Bootstrap**によるレスポンシブ対応  
+・**Rubocop**を使用したコード規約に沿った開発  
+・**9つのモデル**をそれぞれ関連付けて使用  
 
-Things you may want to cover:
+# アプリケーションの機能
+・作った料理を投稿  
+・料理のログ登録（料理を作るとログが追加され、何回作ったことがあるか、いつ作ったかが分かる）  
+・フォロー  
+・コメント  
+・お気に入り登録  
+・作る予定リストへ登録（登録した場合、その料理のユーザーの作る予定リストに表示される）
+・通知（お気に入り登録 or コメントがあった場合）  
+・検索（Ransackを使用）  
+・画像を正方形に整形して投稿（CarrierWaveを使用）  
+・CSV出力  
+・ログイン  
+・ログイン状態の保持  
+・モデルに対するバリデーション  
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 環境
+■フレームワーク  
+　Ruby on Rails  
+■データベース  
+　PostgreSQL  
