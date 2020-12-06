@@ -5,29 +5,29 @@ set :application, "cook-with"
 
 set :repo_url, "git@github.com:tkp14/cook-with.git"
 
-set :branch, 'master'
-set :deploy_to, '/var/www/rails/cook-with'
-set :linked_files, fetch(:linked_files, []).push('.env', 'config/master.key')
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-set :keep_releases, 5
-set :rbenv_ruby, '2.3.1'
-
-# puma setting
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
-set :pty,             true
-set :use_sudo,        false
-set :stage,           :production
-set :deploy_via,      :remote_cache
-set :deploy_to,       "/var/www/rails/#{fetch(:application)}"
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+# Pumaに関する設定（後述）
+# ソケットの場所、Nginxとのやり取りに必要
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"
+# サーバー状態を表すファイルの場所
+set :puma_state, "#{shared_path}/tmp/pids/puma.state"
+# プロセスを表すファイルの場所
+set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
+# ログの場所
 set :puma_access_log, "#{shared_path}/log/puma.error.log"
-set :puma_error_log,  "#{shared_path}/log/puma.access.log"
-set :puma_preload_app, true
-set :puma_worker_timeout, nil
-set :puma_init_active_record, true
+set :puma_error_log, "#{shared_path}/log/puma.access.log"
+
+# タスクでsudoなどを行う際に必要
+set :pty, true
+# シンボリックリンクのファイルを指定、具体的にはsharedに入るファイル
+append :linked_files, "config/master.key"
+# シンボリックリンクのディレクトリを生成
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads", "public/storage"
+set :rbenv_type, :user
+set :rbenv_ruby, '2.5.7'
+# 環境変数の設定
+set :default_env, { path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH" }
+# 保存しておく過去分のアプリ数
+set :keep_releases, 3
 
 namespace :deploy do
   desc 'Create database'
@@ -35,9 +35,16 @@ namespace :deploy do
     on roles(:db) do |host|
       with rails_env: fetch(:rails_env) do
         within current_path do
-          execute :bundle, :exec, :rake, 'db:create'
+          execute :bundle, :exec, :rails, 'db:create'
         end
       end
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
     end
   end
 end
