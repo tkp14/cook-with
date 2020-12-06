@@ -5,8 +5,8 @@ if Rails.env.production?
       # Amazon S3用の設定
       provider:              'AWS',
       region:                'ap-northeast-1',
-      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+      aws_access_key_id: Rails.application.credentials.aws[:access_key_id],
+      aws_secret_access_key: Rails.application.credentials.aws[:secret_access_key]
     }
     config.fog_directory     =  ENV['S3_BUCKET']
   end
