@@ -7,9 +7,8 @@ set :repo_url, "git@github.com:tkp14/cook-with.git"
 
 set :branch, 'master'
 set :deploy_to, '/var/www/rails/cook-with'
-set :linked_files, fetch(:linked_files, []).push('.env')
+set :linked_files, fetch(:linked_files, []).push('.env', 'config/master.key')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-set :linked_files, fetch(:linked_files, []).push("config/master.key")
 set :keep_releases, 5
 set :rbenv_ruby, '2.3.1'
 
