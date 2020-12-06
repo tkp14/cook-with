@@ -6,7 +6,7 @@ set :application, "cook-with"
 set :repo_url, "git@github.com:tkp14/cook-with.git"
 
 set :branch, 'master'
-set :deploy_to, '/var/www/rails/protospacce'
+set :deploy_to, '/var/www/rails/cook-with'
 set :linked_files, fetch(:linked_files, []).push('.env')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :linked_files, fetch(:linked_files, []).push("config/master.key")
