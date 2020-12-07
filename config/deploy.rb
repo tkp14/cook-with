@@ -2,7 +2,7 @@
 lock "~> 3.14.1"
 
 set :application, "cook-with"
-
+set :deploy_to, "/var/www/rails/cook-with"
 set :repo_url, "git@github.com:tkp14/cook-with.git"
 
 # Pumaに関する設定（後述）

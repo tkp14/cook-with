@@ -1,5 +1,6 @@
-server '52.196.123.212', user: "deploy", roles: %w{app db web}
+server '52.196.123.212', user: "takaP", roles: %w{app db web}
 
-set :stage, :production
-set :rails_env, :production
-set :deploy_to, "/takaP/cook-with"
+set :ssh_options, {
+  keys: %w(~/.ssh/id_rsa),
+  forward_agent: true
+}
