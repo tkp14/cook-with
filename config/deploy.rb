@@ -2,10 +2,10 @@
 lock "~> 3.14.1"
 
 set :application, "cook-with"
-set :deploy_to, "/var/www/rails/cook-with"
 set :repo_url, "git@github.com:tkp14/cook-with.git"
+set :deploy_to, "/var/www/rails/cook-with"
 
-# Pumaに関する設定（後述）
+# Pumaに関する設定
 # ソケットの場所、Nginxとのやり取りに必要
 set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"
 # サーバー状態を表すファイルの場所

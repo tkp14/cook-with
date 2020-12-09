@@ -1,6 +1,8 @@
 require "capistrano/setup"
 require "capistrano/deploy"
+
 require "capistrano/rails"
+require "capistrano/bundler"
 require "capistrano/rails/collection"
 require "capistrano/rails/console"
 require "capistrano/rake"
