@@ -1,5 +1,5 @@
 # アプリケーションの概要
-作った料理を投稿して、共有できるサービスです。 https://cook-with.tk
+作った料理を投稿して、共有できるサービスです。 https://www.cook-with.tk
 
 # 技術的ポイント
 ・**RSpec**でModel, Request, Systemテスト記述（計214examples）  
@@ -29,7 +29,9 @@
 ・モデルに対するバリデーション  
 
 # 環境
+■主な使用言語
+ruby  2.5.7
 ■フレームワーク  
-　Ruby on Rails  
+　Ruby on Rails  5.2.3
 ■データベース  
-　PostgreSQL  
+　PostgreSQL  12.3

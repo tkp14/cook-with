@@ -29,8 +29,7 @@ jobs:
             set -x
             docker-compose up -d
       - run:
-          name: Use specific database.yml
-          command: mv config/database.ci.yml config/database.yml
+          command: docker ps
       - run:
           name: データベースのセットアップ
           command: docker-compose exec app bundle exec rails db:create db:migrate RAILS_ENV=test
