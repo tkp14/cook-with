@@ -29,6 +29,9 @@ jobs:
             set -x
             docker-compose up -d
       - run:
+          name: データベースのセットアップ
+          command: docker-compose exec app bundle exec rails db:create db:migrate RAILS_ENV=test
+      - run:
            name: Rspecテスト実行
            command: |
              mkdir /tmp/test-results
