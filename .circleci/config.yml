@@ -31,7 +31,7 @@ jobs:
       - run:
           name: データベースのセットアップ
           command: docker-compose exec app bundle exec rails db:create RAILS_ENV=test
-          command: docker-compose exec app bundle exec rails db:schema:load RAILS_ENV=test
+                   docker-compose exec app bundle exec rails db:schema:load RAILS_ENV=test
       - run:
            name: Rspecテスト実行
            command: |
