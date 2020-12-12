@@ -29,9 +29,9 @@
 ・モデルに対するバリデーション  
 
 # 環境
-■主な使用言語
-ruby  2.5.7
-■フレームワーク  
-　Ruby on Rails  5.2.3
-■データベース  
-　PostgreSQL  12.3
+■主な使用言語<br>
+ruby  2.5.7<br>
+■フレームワーク<br>  
+  Ruby on Rails  5.2.3<br>
+■データベース  <br>
+  PostgreSQL  12.3

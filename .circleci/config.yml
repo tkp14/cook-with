@@ -29,8 +29,8 @@ jobs:
             set -x
             docker-compose up -d
       - run:
-          name: DBの起動確認
-          command: docker-compose exec db psql -V
+          name: DBの起動まで待機
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: データベースのセットアップ
           command: docker-compose exec app bundle exec rails db:create db:migrate RAILS_ENV=test
