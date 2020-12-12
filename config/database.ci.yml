@@ -5,4 +5,4 @@ test:
   username: postgres
   port: 5432
   pool: 5
-  database: ci_test
+  database: cook-with_test
