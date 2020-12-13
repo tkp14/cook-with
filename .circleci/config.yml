@@ -29,8 +29,11 @@ jobs:
             set -x
             docker-compose up -d
       - run:
+          name: 起動確認
+          command: docker-compose exec app rails -v
+      - run:
           name: データベースのセットアップ
-          command: docker-compose exec app bundle exec rails db:create db:migrate db:seed RAILS_ENV=test
+          command: docker-compose exec app bundle exec rails db:create db:migrate RAILS_ENV=test
       - run:
            name: Rspecテスト実行
            command: |
