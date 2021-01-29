@@ -8,8 +8,6 @@ ruby '2.5.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'bootstrap-sass'
 gem 'rails', '5.2.3'
-# Use postgresql as the database for Active Record
-gem 'pg', '1.2.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -35,7 +33,6 @@ gem 'bcrypt', '3.1.13'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'faker'
 gem 'jquery-rails', '4.3.1'
 gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
@@ -55,6 +52,8 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'rubocop-airbnb'
   gem "factory_bot_rails", "~> 4.10.0"
+  gem 'faker'
+  gem 'pg', '1.2.3'
 end
 
 group :development do
