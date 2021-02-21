@@ -1,5 +1,5 @@
 # アプリケーションの概要
-作った料理を投稿して、共有できるサービスです。 https://www.cook-with.tk
+作った料理を投稿したり、共有できるサービスです。 https://www.cook-with.tk
 
 # 技術的ポイント
 ・**RSpec**でModel, Request, Systemテスト記述（計214examples）<br>
@@ -7,6 +7,7 @@
 ・**AWS ACM**でSSL証明書を発行し、SSL化 <br>
 ・**独自ドメイン**を取得、使用 <br>
 ・**Docker**を用いた開発環境,本番環境構築 <br>
+・**デプロイ**はEC2上にDockerコンテナを構築して行っています <br>
 ・**circleci**を用いた自動ビルド＆テスト <br>
 ・**Ajax**を用いた非同期処理（フォロー/未フォロー、お気に入り登録/未登録などの切り替え表示）<br>
 ・**Bootstrap**によるレスポンシブ対応 <br>
