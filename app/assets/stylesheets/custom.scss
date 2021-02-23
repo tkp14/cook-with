@@ -540,6 +540,11 @@ table.ingredient tr:nth-child(odd) {
   /*線の種類（点線）2px 線色*/
   border-bottom: dashed 2px darkorange;
   font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.about-explanation span {
+  color: red;
 }
 
 .about-explanation ul {
@@ -566,5 +571,8 @@ table.ingredient tr:nth-child(odd) {
   }
   p {
     font-size: 20px;
+  }
+  .main-description {
+    padding-bottom: 10px;
   }
 }
