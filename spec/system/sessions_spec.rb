@@ -58,7 +58,6 @@ RSpec.describe "Sessions", type: :system do
         fill_in "user_password", with: user.password
         click_button "ログイン"
 
-        expect(page).to have_link 'クック-ウィズとは？', href: about_path
         expect(page).to have_link 'ユーザー一覧', href: users_path
         expect(page).to have_link 'プロフィール', href: user_path(user)
         expect(page).to have_link 'ログアウト', href: logout_path
