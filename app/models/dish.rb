@@ -5,7 +5,6 @@ class Dish < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :logs, dependent: :destroy
   has_many :ingredients, dependent: :destroy
-  has_many :notifications, dependent: :destroy
   accepts_nested_attributes_for :ingredients
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
