@@ -70,6 +70,7 @@ group :development do
   gem "capistrano-rake", require: false
   gem "capistrano-rbenv"
   gem "capistrano3-puma"
+  gem 'brakeman', require: false
 end
 
 group :test do
