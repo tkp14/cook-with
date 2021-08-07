@@ -1,0 +1,56 @@
+
+== Brakeman Report ==
+
+Application Path: /cook-with
+Rails Version: 5.2.3
+Brakeman Version: 5.1.1
+Scan Date: 2021-08-07 10:34:01 +0000
+Duration: 4.446604 seconds
+Checks Run: BasicAuth, BasicAuthTimingAttack, CSRFTokenForgeryCVE, ContentTag, CookieSerialization, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DynamicFinders, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONEntityEscape, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, PageCachingCVE, PermitAttributes, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, SprocketsPathTraversal, StripTags, SymbolDoSCVE, TemplateInjection, TranslateBug, UnsafeReflection, UnsafeReflectionMethods, ValidationRegex, VerbConfusion, WithoutProtection, XMLDoS, YAMLParsing
+
+== Overview ==
+
+Controllers: 11
+Models: 10
+Templates: 60
+Errors: 0
+Security Warnings: 4
+
+== Warning Types ==
+
+Cross-Site Request Forgery: 1
+Dynamic Render Path: 3
+
+== Warnings ==
+
+Confidence: Medium
+Category: Cross-Site Request Forgery
+Check: CSRFTokenForgeryCVE
+Message: Rails 5.2.3 has a vulnerability that may allow CSRF token forgery. Upgrade to Rails 5.2.4.3 or patch
+File: Gemfile.lock
+Line: 207
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => current_user.feed.paginate(:page => params[:page], :per_page => 5).ransack(params[:q]).result(:distinct => true), {})
+File: app/views/dishes/index.html.erb
+Line: 10
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => User.find(params[:id]).dishes.paginate(:page => params[:page], :per_page => 5), {})
+File: app/views/users/show.html.erb
+Line: 39
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => User.find(params[:id]).followers.paginate(:page => params[:page]), {})
+File: app/views/users/show_follow.html.erb
+Line: 27
+
